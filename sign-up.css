@@ -1,0 +1,198 @@
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #7eb3c4 0%, #9cc9d4 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .signin-label {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 400;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .signup-card {
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 50px 40px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .signup-title {
+            text-align: center;
+            font-size: 24px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 14px;
+            padding: 14px 18px;
+            gap: 12px;
+            transition: all 0.3s;
+        }
+
+        .form-group label:hover {
+            background: white;
+        }
+
+        .form-group label:focus-within {
+            box-shadow: 0 0 0 2px rgba(126, 179, 196, 0.3);
+        }
+
+        .icon {
+            font-size: 18px;
+            width: 22px;
+            color: #999;
+        }
+
+        .form-group input {
+            background: none;
+            border: none;
+            outline: none;
+            flex: 1;
+            font-size: 14px;
+            color: #333;
+            font-family: inherit;
+        }
+
+        .form-group input::placeholder {
+            color: #999;
+        }
+
+        .eye-icon {
+            cursor: pointer;
+            font-size: 18px;
+            transition: opacity 0.3s;
+            color: #666;
+        }
+
+        .eye-icon:hover {
+            opacity: 0.7;
+        }
+
+        .signin-btn {
+            width: 100%;
+            background: #1a1a1a;
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 16px;
+            font-size: 15px;
+            font-weight: 500;
+            cursor: pointer;
+            margin-top: 28px;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+
+        .signin-btn:hover {
+            background: #333;
+            transform: translateY(-2px);
+        }
+
+        .signin-btn:active {
+            transform: translateY(0);
+        }
+
+        .divider-text {
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+            margin-top: 24px;
+            margin-bottom: 16px;
+        }
+
+        .social-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .social-btn {
+            width: 100%;
+            background: transparent;
+            border: 1.5px solid rgba(255, 255, 255, 0.5);
+            padding: 12px 16px;
+            border-radius: 16px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            color: white;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-family: inherit;
+        }
+
+        .social-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.8);
+        }
+
+        .social-icon {
+            font-size: 16px;
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 13px;
+            color: #666;
+        }
+
+        .login-link a {
+            color: #1a1a1a;
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .login-link a:hover {
+            color: #333;
+        }
+
+        @media (max-width: 480px) {
+            .signup-card {
+                padding: 40px 24px;
+            }
+
+            .signup-title {
+                font-size: 20px;
+                margin-bottom: 24px;
+            }
+
+            .form-group label {
+                padding: 12px 14px;
+            }
+        }

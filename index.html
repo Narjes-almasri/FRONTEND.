@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App builder for generate apps</title>
+    <link rel="stylesheet" href="f.css">
+</head>
+<body>
+    <div class="container">
+        <!-- left section: login -->
+        <div class="login-section">
+            <div class="login-card">
+                <div class="login-header">
+                    <div class="login-title">log in</div>
+                    <a href="sign_up.html" class="sign-up-link">sign up</a>
+                </div>
+
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label>
+                            <span class="icon">✉</span> <!-- mat3ob 3la ekhteyar al iconssss -->
+                            <input type="email" id="email" placeholder="e-mail address" required>
+                        </label>
+                    </div>
+
+                    <div class="form-group">
+                        <label>
+                            <span class="icon">🔒</span>
+                            <input type="password" id="password" placeholder="Password" required>
+                            <span class="eye-icon" onclick="togglePassword()">👁️</span>
+                        </label>
+                    </div>
+
+                    <div class="forgot-password">Forget Password?</div>
+                </form>
+
+                <div class="description-text">
+                    Lorem ipsum dolor sit amet consectetur. At orci feugiat turpis in erat vel. Sit odio cursus amet neque eget velit tellus elit.
+                </div>
+
+                <button class="arrow-btn" onclick="handleLogin()">→</button>
+            </div>
+
+            <div class="tagline">
+                Bring your ideas to life — build your app in seconds.
+            </div>
+        </div>
+
+        <!-- right section: app builder and the stolen 3d cube -->
+        <div class="app-card">
+            <div class="app-card-header">
+                <div class="app-title">New</div>
+                <div class="app-subtitle">APP<br>BUILDER</div>
+            </div>
+
+            <div class="cube-container">
+                <div class="cube">
+                    <div class="cube-face cube-face-1"></div>
+                    <div class="cube-face cube-face-2"></div>
+                    <div class="cube-face cube-face-3"></div>
+                    <div class="cube-face cube-face-4"></div>
+                    <div class="cube-face cube-face-5"></div>
+                    <div class="cube-face cube-face-6"></div>
+
+                        <path d="M3 3l7 7m0 0l11 11m-11-11l-7 7m7-7l7-7"/>
+                        <circle cx="4" cy="4" r="2" fill="currentColor"/>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="app-description">
+                <h2>Create apps instantly.</h2>
+                <h2>No code needed.</h2>
+                <h2>Start building today!</h2>
+            </div>
+
+            <div class="card-footer">
+                <div class="credit">
+                    <span>🌍</span>
+                    <span>By T2B</span>
+                </div>
+                <button class="build-btn" onclick="handleBuild()">
+                    Build now
+                    <span>→</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function togglePassword() {
+            const password = document.getElementById('password');
+            password.type = password.type === 'password' ? 'text' : 'password';
+        }
+
+        function handleLogin() {
+            alert('login functionality would be implemented here');
+        }
+
+        function handleBuild() {
+            alert('redirecting to app builder');
+        }
+    </script>
+</body>
+</html>
