@@ -31,7 +31,7 @@
                 <div class="form-group">
                     <label>
                         <span class="icon">🔒</span>
-                        <input type="password" id="pass" placeholder="Password" id="password" required>
+                        <input type="password" id="password" placeholder="Password" required>
                         <span class="eye-icon" onclick="togglePassword()">👁️</span>
                     </label>
                 </div>
@@ -61,12 +61,39 @@
     <script>
         function togglePassword() {
             const password = document.getElementById('password');
+            if (!password) return;
             password.type = password.type === 'password' ? 'text' : 'password';
         }
 
-        document.getElementById('signupForm').addEventListener('submit', function(e) {
+        document.getElementById('signupForm').addEventListener('submit', async function(e) {
             e.preventDefault();
-            alert(' here sign up is submitted this connected to the backend');
+
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+
+            const payload = { name, email, password };
+
+            try {
+                const res = await fetch('/api/signup', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const data = await res.json().catch(() => null);
+
+                if (!res.ok) {
+                    alert('Error: ' + (data && data.message ? data.message : res.statusText));
+                    return;
+                }
+
+                alert(data && data.message ? data.message : 'Signed up successfully');
+                window.location.href = '/index.html';
+            } catch (err) {
+                console.error(err);
+                alert('Network error. See console.');
+            }
         });
 
         function handleAppleSignup() {
@@ -78,7 +105,7 @@
         }
 
         function handleLogin() {
-            alert('redirecting to login page');
+            window.location.href = '/index.html';
         }
     </script>
 </body>

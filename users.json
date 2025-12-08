@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1764952330761,
+    "name": "nar",
+    "email": "narjesalmasri330@gmail.com",
+    "passwordHash": "$2b$10$9kR4DlKHM8X.516.DhEKBeGj7UpGBNfqyvNJbsPgrZyaiU5HIxVYa",
+    "createdAt": "2025-12-05T16:32:10.761Z"
+  },
+  {
+    "id": 1764952434056,
+    "name": "soso",
+    "email": "naalmasr@student.42amman.com",
+    "passwordHash": "$2b$10$2o35uYZuH1/EfKVB1zCbcultWEb/6.934LP6NDtlSuCqOFqrlRx9K",
+    "createdAt": "2025-12-05T16:33:54.056Z"
+  }
+]
