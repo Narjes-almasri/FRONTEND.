@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Choose Your Product Page</title>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;background:linear-gradient(135deg,#7eb3c4 0%,#9cc9d4 100%);min-height:100vh;padding:40px 20px}
+    .container{max-width:1200px;margin:0 auto}
+    h1{font-size:48px;margin-bottom:16px;color:#1a1a1a;font-weight:900;text-align:center}
+    .accent{color:#0b7285}
+    .subtitle{text-align:center;color:#333;margin-bottom:60px;font-size:20px}
+    .options-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:40px;margin-bottom:60px}
+    .option-card{background:rgba(255,255,255,0.15);backdrop-filter:blur(10px);border-radius:20px;padding:24px;cursor:pointer;transition:all 0.3s;border:4px solid transparent;text-align:center}
+    .option-card:hover{transform:translateY(-8px);box-shadow:0 12px 40px rgba(0,0,0,0.2);border-color:rgba(255,255,255,0.5)}
+    .option-card.selected{border-color:#1a1a1a;box-shadow:0 8px 30px rgba(0,0,0,0.3);transform:translateY(-4px)}
+    .option-image{width:100%;height:280px;border-radius:16px;object-fit:cover;margin-bottom:20px;box-shadow:0 4px 12px rgba(0,0,0,0.15)}
+    .option-title{font-size:22px;font-weight:700;color:#1a1a1a;margin-bottom:8px}
+    .option-description{font-size:14px;color:#666;line-height:1.5}
+    .btn-container{display:flex;gap:20px;justify-content:center;margin-top:60px}
+    .btn{padding:16px 48px;border-radius:12px;border:none;font-weight:700;cursor:pointer;font-size:16px;transition:all 0.3s;text-transform:uppercase;letter-spacing:0.5px}
+    .btn-back{background:rgba(255,255,255,0.3);color:#1a1a1a;border:2px solid rgba(255,255,255,0.5)}
+    .btn-back:hover{background:rgba(255,255,255,0.4);transform:translateY(-2px)}
+    .btn-continue{background:linear-gradient(135deg,#7eb3c4,#6ba3b4);color:#fff;box-shadow:0 8px 20px rgba(126,179,196,0.3)}
+    .btn-continue:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(126,179,196,0.4)}
+    .btn-continue:disabled{opacity:0.5;cursor:not-allowed}
+    @media (max-width:768px){
+      h1{font-size:36px}
+      .options-grid{grid-template-columns:1fr;gap:30px}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Choose Your <span class="accent">Product Page</span></h1>
+    <p class="subtitle">Select how you want to showcase your products</p>
+
+    <div class="options-grid">
+      <div class="option-card" data-value="grid">
+        <img src="product_imgs/im1.png" alt="Grid Layout" class="option-image">
+        <div class="option-title">Grid Layout</div>
+        <div class="option-description">Display products in a clean grid format. Easy to browse and compare items at a glance.</div>
+      </div>
+
+      <div class="option-card" data-value="carousel">
+        <img src="product_imgs/im2.png" alt="Carousel View" class="option-image">
+        <div class="option-title">Carousel View</div>
+        <div class="option-description">Showcase products in an interactive carousel. Perfect for highlighting featured items.</div>
+      </div>
+
+      <div class="option-card" data-value="detailed">
+        <img src="product_imgs/im3.png" alt="Detailed View" class="option-image">
+        <div class="option-title">Detailed View</div>
+        <div class="option-description">Large product images with detailed descriptions. Ideal for premium products.</div>
+      </div>
+    </div>
+
+    <div class="btn-container">
+      <button class="btn btn-back" onclick="goBack()">← Back</button>
+      <button class="btn btn-continue" id="continueBtn" disabled onclick="continueToNext()">Continue →</button>
+    </div>
+  </div>
+
+  <script>
+    let selectedProductPage = null;
+    const cards = document.querySelectorAll('.option-card');
+    const continueBtn = document.getElementById('continueBtn');
+
+    cards.forEach(card => {
+      card.addEventListener('click', () => {
+        // Remove selected class from all cards
+        cards.forEach(c => c.classList.remove('selected'));
+        
+        // Add selected class to clicked card
+        card.classList.add('selected');
+        selectedProductPage = card.dataset.value;
+        
+        // Enable continue button
+        continueBtn.disabled = false;
+      });
+    });
+
+    function goBack() {
+      window.location.href = 'catalog_selection.html';
+    }
+
+    function continueToNext() {
+      if (selectedProductPage) {
+        sessionStorage.setItem('selectedProductPage', selectedProductPage);
+        window.location.href = 'build_preview.html';
+      }
+    }
+  </script>
+</body>
+</html>

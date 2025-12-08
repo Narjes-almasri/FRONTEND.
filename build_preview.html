@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Your Generated Site</title>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;background:linear-gradient(135deg,#e9f4f7 0%,#d7e7f0 100%);min-height:100vh;color:#0f172a;padding:32px}
+    .page{max-width:1200px;margin:0 auto}
+    header{display:flex;align-items:center;justify-content:space-between;margin-bottom:32px}
+    .brand{display:flex;align-items:center;gap:14px}
+    .brand img{width:60px;height:60px;object-fit:contain;border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,0.1);background:#fff;padding:6px}
+    .brand h1{font-size:28px;font-weight:900;letter-spacing:-0.5px}
+    .pill{padding:10px 16px;border-radius:999px;font-weight:700;font-size:13px;border:1px solid rgba(15,23,42,0.1);background:rgba(255,255,255,0.7);backdrop-filter:blur(6px)}
+    .hero{border-radius:18px;padding:32px;background:linear-gradient(135deg,var(--c1,#0ea5e9),var(--c2,#7c4dff));color:#fff;box-shadow:0 18px 40px rgba(0,0,0,0.15);margin-bottom:32px;display:grid;grid-template-columns:1.2fr 0.8fr;gap:24px;align-items:center}
+    .hero h2{font-size:36px;margin-bottom:12px;font-weight:900;letter-spacing:-1px}
+    .hero p{font-size:16px;line-height:1.6;color:rgba(255,255,255,0.92)}
+    .hero .cta{margin-top:18px;display:flex;gap:12px}
+    .btn{border:none;border-radius:12px;padding:14px 18px;font-weight:800;cursor:pointer;transition:transform 0.15s,box-shadow 0.15s}
+    .btn:hover{transform:translateY(-2px)}
+    .btn-primary{background:#fff;color:var(--c1,#0ea5e9);box-shadow:0 10px 24px rgba(0,0,0,0.15)}
+    .btn-secondary{background:rgba(255,255,255,0.14);color:#fff;border:1px solid rgba(255,255,255,0.4)}
+    .grid{display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
+    .card{background:#fff;border-radius:16px;padding:20px;box-shadow:0 10px 30px rgba(0,0,0,0.08);border:1px solid rgba(15,23,42,0.06)}
+    .card h3{font-size:18px;margin-bottom:10px;font-weight:800;color:#0f172a}
+    .meta-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px;font-size:13px;color:#475569}
+    .swatches{display:flex;gap:10px;margin-top:12px}
+    .swatch{width:50px;height:50px;border-radius:12px;box-shadow:0 6px 12px rgba(0,0,0,0.12);border:2px solid rgba(15,23,42,0.08)}
+    .catalog-preview,.product-preview{height:200px;border-radius:12px;background:linear-gradient(135deg,rgba(15,23,42,0.05),rgba(15,23,42,0.08));border:1px dashed rgba(15,23,42,0.12);display:flex;align-items:center;justify-content:center;font-weight:700;color:#334155}
+    footer{margin-top:32px;display:flex;justify-content:space-between;align-items:center;font-size:14px;color:#475569}
+    .logo-placeholder{width:60px;height:60px;border-radius:12px;border:2px dashed rgba(15,23,42,0.15);display:flex;align-items:center;justify-content:center;font-weight:800;color:#475569;background:#fff}
+    @media(max-width:900px){.hero{grid-template-columns:1fr}.brand h1{font-size:24px}}
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="brand">
+        <div id="brandLogo" class="logo-placeholder">LOGO</div>
+        <div>
+          <h1 id="brandName">Your Brand</h1>
+          <div id="brandOwner" style="color:#475569;font-weight:600;font-size:13px"></div>
+        </div>
+      </div>
+      <div class="pill" id="catalogTag">Catalog: Modern</div>
+    </header>
+
+    <section class="hero">
+      <div>
+        <h2 id="heroTitle">Welcome to Your Brand</h2>
+        <p id="heroSubtitle">We built this preview using your choices: palette, catalog style, product layout, and logo.</p>
+        <div class="cta">
+          <button class="btn btn-primary" onclick="saveSite()">Save</button>
+          <button class="btn btn-primary" onclick="alert('Deploy coming soon')">Launch Site</button>
+          <button class="btn btn-secondary" onclick="window.location.href='product_page_selection.html'">Back</button>
+        </div>
+      </div>
+      <div class="card" style="background:rgba(255,255,255,0.16);backdrop-filter:blur(8px);border-color:rgba(255,255,255,0.3);color:#fff">
+        <h3 style="color:#fff">Palette</h3>
+        <div class="swatches" id="paletteSwatches"></div>
+        <div id="paletteName" style="margin-top:10px;font-weight:700"></div>
+      </div>
+    </section>
+
+    <section class="grid">
+      <div class="card">
+        <h3>Catalog Style</h3>
+        <div class="catalog-preview" id="catalogPreview">Modern Catalog</div>
+        <div class="meta-row" id="catalogMeta"></div>
+      </div>
+
+      <div class="card">
+        <h3>Product Layout</h3>
+        <div class="product-preview" id="productPreview">Grid Layout</div>
+        <div class="meta-row" id="productMeta"></div>
+      </div>
+
+      <div class="card">
+        <h3>Logo</h3>
+        <div style="display:flex;align-items:center;gap:12px">
+          <div id="logoPreview" class="logo-placeholder" style="width:90px;height:90px;font-size:12px"></div>
+          <div style="font-size:14px;color:#475569">
+            <div id="logoStatus">No logo uploaded</div>
+            <div id="appNameText" style="font-weight:700;color:#0f172a;margin-top:4px"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div id="profileInfo">Profile info not set</div>
+      <div>Selections are stored in your browser</div>
+    </footer>
+  </div>
+
+  <script>
+    const defaultPalette = ['#0EA5E9','#7C4DFF','#06D6A0'];
+    const catalogMap = {
+      modern: {title:'Modern Catalog', desc:'Clean, minimalist design with focus on products.'},
+      classic: {title:'Classic Catalog', desc:'Elegant typography and structured layouts.'},
+      creative: {title:'Creative Catalog', desc:'Bold, colorful, expressive grids.'}
+    };
+    const productMap = {
+      grid: {title:'Grid Layout', desc:'Clean grid to browse quickly.'},
+      carousel: {title:'Carousel View', desc:'Highlight featured items in motion.'},
+      detailed: {title:'Detailed View', desc:'Large images with rich descriptions.'}
+    };
+
+    function saveSite() {
+      sessionStorage.setItem('siteConfirmed', 'true');
+      sessionStorage.setItem('siteStatusMessage', 'Your website will be generated in the container app. Check it out.');
+      window.location.href = 'thank_you.html';
+    }
+
+    function loadSelections() {
+      const appName = sessionStorage.getItem('appName') || 'Your Brand';
+      const logo = sessionStorage.getItem('generatedLogo') || sessionStorage.getItem('uploadedLogo');
+      const profile = sessionStorage.getItem('userProfile');
+      const paletteRaw = sessionStorage.getItem('selectedPalette');
+      const catalog = sessionStorage.getItem('selectedCatalog') || 'modern';
+      const product = sessionStorage.getItem('selectedProductPage') || 'grid';
+
+      const palette = paletteRaw ? JSON.parse(paletteRaw).colors || defaultPalette : defaultPalette;
+      const paletteName = paletteRaw ? JSON.parse(paletteRaw).name || 'Custom Palette' : 'Default Palette';
+
+      // apply palette across page
+      document.documentElement.style.setProperty('--c1', palette[0]);
+      document.documentElement.style.setProperty('--c2', palette[1] || palette[0]);
+      document.body.style.background = `linear-gradient(135deg, ${palette[0]} 0%, ${palette[1] || palette[0]} 100%)`;
+
+      // Brand info
+      document.getElementById('brandName').textContent = appName;
+      document.getElementById('heroTitle').textContent = `Welcome to ${appName}`;
+      document.getElementById('appNameText').textContent = appName;
+
+      if (profile) {
+        const p = JSON.parse(profile);
+        document.getElementById('brandOwner').textContent = `${p.firstName || ''} ${p.lastName || ''}`.trim();
+        document.getElementById('profileInfo').textContent = `${p.firstName || ''} ${p.lastName || ''} · ${p.phone || ''}`;
+      }
+
+      // Logo
+      const logoEl = document.getElementById('brandLogo');
+      const logoPreview = document.getElementById('logoPreview');
+      if (logo) {
+        const img = document.createElement('img');
+        img.src = logo;
+        img.alt = 'Logo';
+        img.style.width = '100%';
+        img.style.height = '100%';
+        img.style.objectFit = 'contain';
+        img.style.borderRadius = '12px';
+        logoEl.innerHTML = '';
+        logoEl.appendChild(img.cloneNode(true));
+        logoPreview.innerHTML = '';
+        logoPreview.appendChild(img);
+        document.getElementById('logoStatus').textContent = 'Uploaded logo applied';
+      } else {
+        document.getElementById('logoStatus').textContent = 'No logo uploaded';
+      }
+
+      // Palette rendering
+      const swatches = document.getElementById('paletteSwatches');
+      swatches.innerHTML = '';
+      palette.slice(0,3).forEach(c => {
+        const sw = document.createElement('div');
+        sw.className = 'swatch';
+        sw.style.background = c;
+        swatches.appendChild(sw);
+      });
+      document.getElementById('paletteName').textContent = paletteName;
+
+      // apply CSS vars from palette
+      document.documentElement.style.setProperty('--c1', palette[0]);
+      document.documentElement.style.setProperty('--c2', palette[1] || palette[0]);
+
+      // Catalog
+      const catalogData = catalogMap[catalog] || catalogMap.modern;
+      document.getElementById('catalogPreview').textContent = catalogData.title;
+      document.getElementById('catalogMeta').textContent = catalogData.desc;
+      document.getElementById('catalogTag').textContent = `Catalog: ${catalogData.title}`;
+
+      // Product layout
+      const productData = productMap[product] || productMap.grid;
+      document.getElementById('productPreview').textContent = productData.title;
+      document.getElementById('productMeta').textContent = productData.desc;
+    }
+
+    loadSelections();
+  </script>
+</body>
+</html>

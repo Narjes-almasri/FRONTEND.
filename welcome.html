@@ -1,0 +1,118 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Welcome to T2B</title>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;background:linear-gradient(135deg,#7eb3c4 0%,#9cc9d4 100%);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;overflow:hidden}
+    #fireworks-container{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:5}
+    .firework{position:fixed;width:12px;height:12px;border-radius:50%;pointer-events:none}
+    .content{text-align:center;color:#fff;z-index:10;position:relative;opacity:0;animation:fadeIn 1s ease 2.5s forwards}
+    h1{font-size:72px;font-weight:900;margin-bottom:20px;animation:slideUp 0.8s ease 3s both;letter-spacing:-2px}
+    .subtitle{font-size:24px;color:rgba(255,255,255,0.9);margin-bottom:60px;animation:slideUp 0.8s ease 3.2s both}
+    .card{background:rgba(255,255,255,0.1);backdrop-filter:blur(20px);padding:60px;border-radius:20px;max-width:600px;margin:0 auto;animation:slideUp 0.8s ease 3.4s both}
+    .card h2{font-size:36px;margin-bottom:16px}
+    .card p{font-size:18px;color:rgba(255,255,255,0.9);margin-bottom:40px}
+    .btn{display:inline-block;padding:18px 48px;background:linear-gradient(135deg,#2d7a8f,#5fa3b8);color:#fff;text-decoration:none;border-radius:14px;font-weight:700;font-size:18px;transition:all 0.3s;border:none;cursor:pointer;box-shadow:0 10px 30px rgba(45,122,143,0.4)}
+    .btn:hover{transform:translateY(-4px);box-shadow:0 15px 40px rgba(45,122,143,0.6)}
+    @keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+  </style>
+</head>
+<body>
+  <div id="fireworks-container"></div>
+  
+  <div class="content">
+    <h1>🎉 Welcome to T2B</h1>
+    <div class="subtitle">Your journey to the perfect website starts here</div>
+    
+    <div class="card">
+      <h2>Ready to build the perfect website?</h2>
+      <p>We'll guide you through creating your brand identity and designing your dream website</p>
+      <button class="btn" onclick="continueToColors()">Let's do it →</button>
+    </div>
+  </div>
+
+  <script>
+    const colors = ['#2d7a8f', '#5fa3b8', '#7eb8c8', '#9cc9d4', '#7eb3c4', '#1a1a1a'];
+    let particles = [];
+
+    class Particle {
+      constructor(x, y) {
+        this.x = x;
+        this.y = y;
+        this.vx = (Math.random() - 0.5) * 16;
+        this.vy = (Math.random() - 0.5) * 16 - 5;
+        this.life = 1;
+        this.maxLife = 1;
+        this.decay = Math.random() * 0.015 + 0.01;
+        
+        this.element = document.createElement('div');
+        this.element.className = 'firework';
+        this.element.style.background = colors[Math.floor(Math.random() * colors.length)];
+        this.element.style.left = x + 'px';
+        this.element.style.top = y + 'px';
+        document.getElementById('fireworks-container').appendChild(this.element);
+      }
+
+      update() {
+        this.x += this.vx;
+        this.y += this.vy;
+        this.vy += 0.3;
+        this.life -= this.decay;
+        
+        this.element.style.left = this.x + 'px';
+        this.element.style.top = this.y + 'px';
+        this.element.style.opacity = Math.max(0, this.life);
+        
+        return this.life > 0;
+      }
+
+      destroy() {
+        this.element.remove();
+      }
+    }
+
+    function createExplosion(x, y) {
+      for (let i = 0; i < 40; i++) {
+        particles.push(new Particle(x, y));
+      }
+    }
+
+    function animate() {
+      particles = particles.filter(p => {
+        if (p.update()) {
+          return true;
+        } else {
+          p.destroy();
+          return false;
+        }
+      });
+
+      if (particles.length > 0) {
+        requestAnimationFrame(animate);
+      }
+    }
+
+    function startFireworks() {
+      createExplosion(window.innerWidth * 0.2, window.innerHeight * 0.2);
+      setTimeout(() => createExplosion(window.innerWidth * 0.8, window.innerHeight * 0.3), 200);
+      setTimeout(() => createExplosion(window.innerWidth * 0.5, window.innerHeight * 0.15), 400);
+      setTimeout(() => createExplosion(window.innerWidth * 0.25, window.innerHeight * 0.6), 600);
+      setTimeout(() => createExplosion(window.innerWidth * 0.75, window.innerHeight * 0.7), 800);
+      setTimeout(() => createExplosion(window.innerWidth * 0.5, window.innerHeight * 0.5), 1000);
+      
+      animate();
+    }
+
+    function continueToColors() {
+      window.location.href = 'color_palette.html';
+    }
+
+    window.addEventListener('load', startFireworks);
+  </script>
+</body>
+</html>

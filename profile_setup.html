@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Complete Your Profile</title>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;background:linear-gradient(135deg,#7eb3c4 0%,#9cc9d4 100%);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+    .container{background:rgba(255,255,255,0.12);backdrop-filter:blur(10px);padding:60px;border-radius:24px;box-shadow:0 8px 32px rgba(0,0,0,0.1);max-width:500px;width:100%}
+    h1{font-size:36px;margin-bottom:12px;color:#1a1a1a;font-weight:800}
+    p{color:#333;margin-bottom:32px;font-size:16px;line-height:1.6}
+    .form-group{margin-bottom:20px}
+    label{display:block;font-size:14px;font-weight:700;color:#1a1a1a;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px}
+    input[type="text"],input[type="email"],input[type="tel"]{width:100%;padding:14px 16px;border:2px solid rgba(255,255,255,0.3);border-radius:10px;font-size:16px;background:rgba(255,255,255,0.8);transition:all 0.3s;color:#1a1a1a}
+    input[type="text"]:focus,input[type="email"]:focus,input[type="tel"]:focus{outline:none;border-color:rgba(255,255,255,0.8);background:#fff;box-shadow:0 0 0 4px rgba(126,179,196,0.2)}
+    input::placeholder{color:#999}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .error{color:#ef476f;font-size:13px;margin-top:6px;font-weight:600;display:none}
+    .btn-container{margin-top:40px}
+    .btn{width:100%;padding:16px;border-radius:12px;border:none;font-weight:700;cursor:pointer;font-size:16px;transition:all 0.3s;text-transform:uppercase;letter-spacing:0.5px}
+    .btn-primary{background:linear-gradient(135deg,#7eb3c4,#6ba3b4);color:#fff;box-shadow:0 8px 20px rgba(126,179,196,0.3)}
+    .btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(126,179,196,0.4)}
+    .btn-primary:disabled{opacity:0.6;cursor:not-allowed;transform:none}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Complete Your Profile</h1>
+    <p>Tell us a bit about yourself and your business</p>
+
+    <form id="profileForm">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="firstName">First Name</label>
+          <input id="firstName" type="text" placeholder="e.g. Narjes" required>
+          <div class="error" id="firstNameError"></div>
+        </div>
+        <div class="form-group">
+          <label for="lastName">Last Name</label>
+          <input id="lastName" type="text" placeholder="e.g. Almasri" required>
+          <div class="error" id="lastNameError"></div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="websiteName">Website/Business Name</label>
+        <input id="websiteName" type="text" placeholder="e.g., Tech Solutions Co." required>
+        <div class="error" id="websiteNameError"></div>
+      </div>
+
+      <div class="form-group">
+        <label for="phone">Phone Number</label>
+        <input id="phone" type="tel" placeholder="e.g., +962 79.." required>
+        <div class="error" id="phoneError"></div>
+      </div>
+
+      <div class="btn-container">
+        <button type="submit" class="btn btn-primary">Continue →</button>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    const profileForm = document.getElementById('profileForm');
+    const inputs = {
+      firstName: document.getElementById('firstName'),
+      lastName: document.getElementById('lastName'),
+      websiteName: document.getElementById('websiteName'),
+      phone: document.getElementById('phone')
+    };
+
+    function validateForm() {
+      let isValid = true;
+      const errors = {
+        firstName: document.getElementById('firstNameError'),
+        lastName: document.getElementById('lastNameError'),
+        websiteName: document.getElementById('websiteNameError'),
+        phone: document.getElementById('phoneError')
+      };
+
+      Object.keys(inputs).forEach(key => {
+        const value = inputs[key].value.trim();
+        if (!value) {
+          errors[key].textContent = 'This field is required';
+          errors[key].style.display = 'block';
+          isValid = false;
+        } else {
+          errors[key].style.display = 'none';
+        }
+      });
+
+      // Basic phone validation
+      if (inputs.phone.value && !/[\d\s\-\+\(\)]{8,}/.test(inputs.phone.value)) {
+        errors.phone.textContent = 'Please enter a valid phone number';
+        errors.phone.style.display = 'block';
+        isValid = false;
+      }
+
+      return isValid;
+    }
+
+    profileForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      if (!validateForm()) return;
+
+      // Store profile data
+      sessionStorage.setItem('userProfile', JSON.stringify({
+        firstName: inputs.firstName.value.trim(),
+        lastName: inputs.lastName.value.trim(),
+        websiteName: inputs.websiteName.value.trim(),
+        phone: inputs.phone.value.trim()
+      }));
+
+      // Navigate to welcome page
+      window.location.href = 'welcome.html';
+    });
+
+    // Load saved data if returning
+    window.addEventListener('load', () => {
+      const saved = sessionStorage.getItem('userProfile');
+      if (saved) {
+        const data = JSON.parse(saved);
+        inputs.firstName.value = data.firstName;
+        inputs.lastName.value = data.lastName;
+        inputs.websiteName.value = data.websiteName;
+        inputs.phone.value = data.phone;
+      }
+    });
+  </script>
+</body>
+</html>
