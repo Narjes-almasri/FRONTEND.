@@ -8,7 +8,6 @@ const PORT = process.env.PORT || 3000;
 const DATA_FILE = path.join(__dirname, 'users.json');
 
 app.use(express.json());
-// Allow local file:// or other origins to call the API without CORS errors
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', 'Content-Type');

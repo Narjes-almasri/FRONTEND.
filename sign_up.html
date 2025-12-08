@@ -74,7 +74,6 @@
 
             const payload = { name, email, password };
 
-            // Pick correct API base: if running from file:// or any non-localhost origin, fall back to localhost:3000
             const isFile = window.location.protocol === 'file:';
             const isLocalhost = /localhost|127\.0\.0\.1/.test(window.location.hostname);
             const base = isFile ? 'http://localhost:3000' : (isLocalhost ? window.location.origin : 'http://localhost:3000');

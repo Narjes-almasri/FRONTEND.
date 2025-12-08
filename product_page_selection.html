@@ -69,14 +69,9 @@
 
     cards.forEach(card => {
       card.addEventListener('click', () => {
-        // Remove selected class from all cards
         cards.forEach(c => c.classList.remove('selected'));
-        
-        // Add selected class to clicked card
         card.classList.add('selected');
         selectedProductPage = card.dataset.value;
-        
-        // Enable continue button
         continueBtn.disabled = false;
       });
     });

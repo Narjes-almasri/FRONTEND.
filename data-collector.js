@@ -1,14 +1,5 @@
-/**
- * Data Collector Utility
- * Collects all user selections and converts them to a JSON format
- * ready to send to the backend
- */
-
 class SiteDataCollector {
-  /**
-   * Collect all user data from sessionStorage
-   * @returns {Object} Complete site configuration object
-   */
+  
   static collectAllData() {
     const userProfile = JSON.parse(sessionStorage.getItem('userProfile') || '{}');
     const selectedPalette = JSON.parse(sessionStorage.getItem('selectedPalette') || '{}');
@@ -43,10 +34,7 @@ class SiteDataCollector {
     };
   }
 
-  /**
-   * Get data without logo for preview/display
-   * @returns {Object} Data object without binary logo
-   */
+ 
   static getDataForDisplay() {
     const data = this.collectAllData();
     const displayData = {...data};
@@ -56,10 +44,7 @@ class SiteDataCollector {
     return displayData;
   }
 
-  /**
-   * Download JSON file to user's device
-   * @param {string} filename - Optional filename (defaults to timestamp-based)
-   */
+
   static downloadAsJSON(filename = null) {
     const data = this.collectAllData();
     const jsonString = JSON.stringify(data, null, 2);
@@ -74,12 +59,6 @@ class SiteDataCollector {
     URL.revokeObjectURL(url);
   }
 
-  /**
-   * Send data to backend API
-   * @param {string} apiEndpoint - Backend endpoint URL
-   * @param {Object} options - Optional configuration
-   * @returns {Promise<Object>} Response from backend
-   */
   static async sendToBackend(apiEndpoint, options = {}) {
     const data = this.collectAllData();
     const defaultOptions = {
@@ -116,10 +95,7 @@ class SiteDataCollector {
     }
   }
 
-  /**
-   * Get formatted JSON string for display
-   * @returns {string} Formatted JSON string
-   */
+
   static getFormattedJSON() {
     const data = this.collectAllData();
     const displayData = {...data};
@@ -129,10 +105,6 @@ class SiteDataCollector {
     return JSON.stringify(displayData, null, 2);
   }
 
-  /**
-   * Get data summary for logging
-   * @returns {Object} Summary object with key info
-   */
   static getSummary() {
     const data = this.collectAllData();
     return {
@@ -147,7 +119,6 @@ class SiteDataCollector {
   }
 }
 
-// Export for use in other files
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = SiteDataCollector;
 }

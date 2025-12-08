@@ -120,7 +120,6 @@
     });
 
     function customizeLogo() {
-      // Store app name and navigate to generation page
       sessionStorage.setItem('appName', appName);
       window.location.href = 'generation.html';
     }
@@ -134,7 +133,6 @@
       window.location.href = 'post_login.html';
     }
 
-    // Load profile data and display website name
     window.addEventListener('load', () => {
       // Get website name from profile data
       const userProfile = sessionStorage.getItem('userProfile');

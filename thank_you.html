@@ -49,7 +49,6 @@
       document.getElementById('status').textContent = msg;
     }
 
-    // Function to collect all user data from sessionStorage
     function collectUserData() {
       const userProfile = JSON.parse(sessionStorage.getItem('userProfile') || '{}');
       const selectedPalette = JSON.parse(sessionStorage.getItem('selectedPalette') || '{}');
@@ -84,13 +83,11 @@
       };
     }
 
-    // View data in a preview section
     function viewData() {
       const data = collectUserData();
       const dataSection = document.getElementById('dataSection');
       const dataPreview = document.getElementById('dataPreview');
       
-      // Remove logo data for display purposes
       const displayData = {...data};
       displayData.logoData = displayData.logoData ? '(Base64 image data - ' + Math.round(displayData.logoData.length / 1024) + 'KB)' : null;
       
@@ -98,7 +95,6 @@
       dataSection.classList.add('show');
     }
 
-    // Download JSON file
     function downloadJSON() {
       const data = collectUserData();
       const jsonString = JSON.stringify(data, null, 2);
@@ -115,13 +111,6 @@
       showMessage('✓ JSON file downloaded successfully!', 'success');
     }
 
-    // Send data to backend
-    // (Backend developer will implement this)
-    // function sendToBackend() {
-    //   ...
-    // }
-
-    // Helper function to show messages
     function showMessage(msg, type) {
       const successMsg = document.getElementById('successMsg');
       const errorMsg = document.getElementById('errorMsg');

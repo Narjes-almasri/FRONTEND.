@@ -90,7 +90,6 @@
         }
       });
 
-      // Basic phone validation
       if (inputs.phone.value && !/[\d\s\-\+\(\)]{8,}/.test(inputs.phone.value)) {
         errors.phone.textContent = 'Please enter a valid phone number';
         errors.phone.style.display = 'block';
@@ -105,7 +104,6 @@
 
       if (!validateForm()) return;
 
-      // Store profile data
       sessionStorage.setItem('userProfile', JSON.stringify({
         firstName: inputs.firstName.value.trim(),
         lastName: inputs.lastName.value.trim(),
@@ -113,11 +111,9 @@
         phone: inputs.phone.value.trim()
       }));
 
-      // Navigate to welcome page
       window.location.href = 'welcome.html';
     });
 
-    // Load saved data if returning
     window.addEventListener('load', () => {
       const saved = sessionStorage.getItem('userProfile');
       if (saved) {

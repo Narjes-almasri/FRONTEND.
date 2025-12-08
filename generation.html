@@ -129,7 +129,6 @@
     </style>
 
     <script>
-      // Check for app name and uploaded logo from setup page
       (function(){
         const appName = sessionStorage.getItem('appName');
         const generatedLogo = sessionStorage.getItem('generatedLogo');
@@ -140,7 +139,6 @@
           document.getElementById('headerDesc').textContent = `Design a unique logo for ${appName} using our painter tools. Add shapes, colors, and text.`;
         }
         
-        // Display uploaded logo on whiteboard
         if (uploadedLogo) {
           const whiteboard = document.getElementById('whiteboard');
           const img = document.createElement('img');
@@ -160,7 +158,6 @@
       })();
 
       (function(){
-        // Use default painter palette; do not override with selectedPalette here
         const colors = ['#0EA5E9','#7C4DFF','#06D6A0','#FFB703','#EF476F','#FFFFFF','#000000','#F97316','#06B6D4','#FB7185','#FB923C','#34D399'];
         const palette = document.getElementById('palette');
         const colorPicker = document.getElementById('colorPicker');
