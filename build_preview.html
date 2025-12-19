@@ -3,191 +3,1253 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Your Generated Site</title>
+  <title>Website Template</title>
+  <link rel="icon" href="images/website_logo.png" type="image/png"/>
   <style>
+    :root {
+      --c1: #0EA5E9;
+      --c2: #7C4DFF;
+      --c3: #06D6A0;
+      --bg: #f5f5f5;
+      --panel: #ffffff;
+      --text: #1a1a1a;
+      --muted: #666666;
+      --border: #dddddd;
+      --muted2: #999999;
+    }
+    
     *{margin:0;padding:0;box-sizing:border-box}
-    body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;background:linear-gradient(135deg,#e9f4f7 0%,#d7e7f0 100%);min-height:100vh;color:#0f172a;padding:32px}
-    .page{max-width:1200px;margin:0 auto}
-    header{display:flex;align-items:center;justify-content:space-between;margin-bottom:32px}
-    .brand{display:flex;align-items:center;gap:14px}
-    .brand img{width:60px;height:60px;object-fit:contain;border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,0.1);background:#fff;padding:6px}
-    .brand h1{font-size:28px;font-weight:900;letter-spacing:-0.5px}
-    .pill{padding:10px 16px;border-radius:999px;font-weight:700;font-size:13px;border:1px solid rgba(15,23,42,0.1);background:rgba(255,255,255,0.7);backdrop-filter:blur(6px)}
-    .hero{border-radius:18px;padding:32px;background:linear-gradient(135deg,var(--c1,#0ea5e9),var(--c2,#7c4dff));color:#fff;box-shadow:0 18px 40px rgba(0,0,0,0.15);margin-bottom:32px;display:grid;grid-template-columns:1.2fr 0.8fr;gap:24px;align-items:center}
-    .hero h2{font-size:36px;margin-bottom:12px;font-weight:900;letter-spacing:-1px}
-    .hero p{font-size:16px;line-height:1.6;color:rgba(255,255,255,0.92)}
-    .hero .cta{margin-top:18px;display:flex;gap:12px}
-    .btn{border:none;border-radius:12px;padding:14px 18px;font-weight:800;cursor:pointer;transition:transform 0.15s,box-shadow 0.15s}
-    .btn:hover{transform:translateY(-2px)}
-    .btn-primary{background:#fff;color:var(--c1,#0ea5e9);box-shadow:0 10px 24px rgba(0,0,0,0.15)}
-    .btn-secondary{background:rgba(255,255,255,0.14);color:#fff;border:1px solid rgba(255,255,255,0.4)}
-    .grid{display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
-    .card{background:#fff;border-radius:16px;padding:20px;box-shadow:0 10px 30px rgba(0,0,0,0.08);border:1px solid rgba(15,23,42,0.06)}
-    .card h3{font-size:18px;margin-bottom:10px;font-weight:800;color:#0f172a}
-    .meta-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px;font-size:13px;color:#475569}
-    .swatches{display:flex;gap:10px;margin-top:12px}
-    .swatch{width:50px;height:50px;border-radius:12px;box-shadow:0 6px 12px rgba(0,0,0,0.12);border:2px solid rgba(15,23,42,0.08)}
-    .catalog-preview,.product-preview{height:200px;border-radius:12px;background:linear-gradient(135deg,rgba(15,23,42,0.05),rgba(15,23,42,0.08));border:1px dashed rgba(15,23,42,0.12);display:flex;align-items:center;justify-content:center;font-weight:700;color:#334155}
-    footer{margin-top:32px;display:flex;justify-content:space-between;align-items:center;font-size:14px;color:#475569}
-    .logo-placeholder{width:60px;height:60px;border-radius:12px;border:2px dashed rgba(15,23,42,0.15);display:flex;align-items:center;justify-content:center;font-weight:800;color:#475569;background:#fff}
-    @media(max-width:900px){.hero{grid-template-columns:1fr}.brand h1{font-size:24px}}
-  </style>
+    
+    body{
+      font-family:'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;
+      background:var(--bg);
+      min-height:100vh;
+      color:var(--text);
+      padding:20px
+    }
+    
+    .page{max-width:900px;margin:0 auto}
+    
+    /* Header Section */
+    .header{
+      background:var(--panel);border-radius:8px;padding:24px;margin-bottom:24px;
+      box-shadow:0 2px 8px rgba(0,0,0,0.08)
+    }
+
+    .header-content{
+      display:flex;justify-content:space-between;align-items:center;gap:24px
+    }
+
+    .header-left{display:flex;align-items:center;gap:12px;flex:1}
+    .logo{width:48px;height:48px;background:var(--c1);border-radius:50%}
+    .identity{display:flex;flex-direction:column;gap:2px}
+    .site-name{font-weight:900;font-size:18px;letter-spacing:-0.2px;color:var(--text)}
+    .logo-name{font-size:clamp(18px,4vw,32px);font-weight:900;letter-spacing:-2px;display:inline-block;background:linear-gradient(90deg,var(--c1) 0%,var(--c2) 33%,var(--c3) 66%,var(--c1) 100%);background-size:200% 100%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:rainbow 3s linear infinite}
+    @keyframes rainbow{0%{background-position:0% 50%}100%{background-position:200% 50%}}
+    .owner-small{font-size:12px;color:var(--muted);font-weight:700}
+    
+    .header-button{
+      padding:12px 32px;border-radius:12px;border:2px solid transparent;font-weight:700;
+      cursor:pointer;font-size:14px;transition:all 0.3s;text-transform:uppercase;letter-spacing:0.5px;
+      background:linear-gradient(135deg,#154552,#357a8e);color:#fff;box-shadow:0 8px 20px rgba(21,69,82,0.3)
+    }
+    .header-button:hover{border:2px solid rgba(255,255,255,0.8);transform:translateY(-2px);box-shadow:0 12px 30px rgba(21,69,82,0.4)}
+    .header-right{display:flex;gap:12px;align-items:center;position:relative}
+    .top-nav{display:flex;align-items:center;gap:12px;margin-right:8px}
+    .top-nav a{font-weight:700;color:var(--text);text-decoration:none;padding:6px 0;border-bottom:2px solid transparent;letter-spacing:0.2px}
+    .top-nav a:hover{border-color:var(--c1);color:var(--c1)}
+    .header-button.secondary{background:rgba(255,255,255,0.3);color:#1a1a1a;border:2px solid transparent;box-shadow:none}
+    .header-button.secondary:hover{background:rgba(255,255,255,0.4);border:2px solid rgba(255,255,255,0.8);transform:translateY(-2px)}
+    .header-button[disabled]{opacity:0.6;cursor:not-allowed;transform:none!important}
+    .btn-back{
+      padding:12px 32px;border-radius:12px;font-weight:700;cursor:pointer;font-size:14px;
+      transition:all 0.3s;text-transform:uppercase;letter-spacing:0.5px;
+      background:#e5e5e5;color:#1a1a1a;border:2px solid transparent
+    }
+    .btn-backc:hover{background:#d0d0d0;border:2px solid rgba(0,0,0,0.2);transform:translateY(-2px)}
+    .header-meta{display:none}
+    .header-meta .label{color:#333;font-weight:700}
+    
+    /* Notification */
+    .notification{position:fixed;top:24px;right:24px;max-width:420px;background:var(--panel);border-radius:12px;padding:20px 24px;box-shadow:0 12px 40px rgba(0,0,0,0.15);border-left:4px solid var(--c1);z-index:9999;display:none;animation:slideIn 0.3s ease}
+    .notification.show{display:block}
+    @keyframes slideIn{from{transform:translateX(400px);opacity:0}to{transform:translateX(0);opacity:1}}
+    .notification-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+    .notification-title{font-weight:800;font-size:16px;color:var(--c1);display:flex;align-items:center;gap:8px}
+    .notification-close{background:none;border:none;font-size:24px;cursor:pointer;color:var(--muted);line-height:1;padding:0;width:24px;height:24px;display:flex;align-items:center;justify-content:center;transition:color 0.2s}
+    .notification-close:hover{color:var(--text)}
+    .notification-body{color:var(--text);font-size:16px;line-height:1.7;font-weight:500}
+    
+    .hamburger{width:32px;height:32px;display:flex;flex-direction:column;justify-content:space-around;cursor:pointer;padding:4px}
+    .hamburger span{width:100%;height:3px;background:var(--text);border-radius:2px;transition:all 0.3s}
+    .hamburger:hover span{background:var(--c1)}
+    .menu-panel{position:absolute;top:48px;right:0;background:var(--panel);border:1px solid var(--border);border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,0.12);display:none;min-width:180px;z-index:1000}
+    .menu-panel.active{display:block}
+    .menu-panel a{display:block;padding:10px 12px;text-decoration:none;color:var(--text);font-weight:700;font-size:13px}
+    .menu-panel a:hover{background:rgba(0,0,0,0.05);color:var(--c1)}
+    
+    /* Logo Controls */
+    .logo-controls{position:fixed;top:100px;right:20px;background:var(--panel);border-radius:12px;padding:20px;box-shadow:0 4px 20px rgba(0,0,0,0.15);z-index:999;display:none;min-width:280px}
+    .logo-controls.active{display:block}
+    .logo-controls h4{margin-bottom:16px;font-size:14px;color:var(--text);font-weight:800}
+    .logo-control-group{margin-bottom:16px}
+    .logo-control-group label{display:block;font-size:12px;color:var(--muted);margin-bottom:8px;font-weight:700}
+    .logo-control-group input[type="range"]{width:100%;cursor:pointer}
+    .logo-control-group .value-display{display:inline-block;min-width:40px;text-align:right;font-weight:700;font-size:12px;color:var(--c1)}
+    .logo-controls button{width:100%;padding:10px;border-radius:8px;border:none;font-weight:700;cursor:pointer;transition:all 0.2s;font-size:13px;margin-bottom:8px}
+    .logo-controls .btn-upload{background:var(--c1);color:#fff}
+    .logo-controls .btn-upload:hover{background:var(--c2);transform:translateY(-1px)}
+    .logo-controls .btn-close{background:rgba(0,0,0,0.05);color:var(--text)}
+    .logo-controls .btn-close:hover{background:rgba(0,0,0,0.1)}
+    .logo-edit-icon{position:absolute;top:-8px;right:-8px;width:24px;height:24px;background:var(--c1);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,0.2);transition:all 0.2s}
+    .logo-edit-icon:hover{background:var(--c2);transform:scale(1.1)}
+    .logo-wrapper{position:relative;display:inline-block}
+    
+    /* Logo Viewer Modal */
+    .logo-viewer-modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);z-index:2000;align-items:center;justify-content:center}
+    .logo-viewer-modal.active{display:flex}
+    .logo-viewer-content{width:90%;max-width:800px;background:var(--panel);border-radius:16px;padding:24px;position:relative}
+    .logo-viewer-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+    .logo-viewer-header h3{font-size:18px;font-weight:800;color:var(--text)}
+    .logo-viewer-close{background:none;border:none;font-size:32px;cursor:pointer;color:var(--muted);line-height:1}
+    .logo-viewer-close:hover{color:var(--text)}
+    .logo-viewer-canvas{width:100%;height:400px;background:#f5f5f5;border-radius:12px;overflow:hidden;position:relative;cursor:move;margin-bottom:20px}
+    .logo-viewer-image{position:absolute;top:50%;left:50%;transform-origin:center;transition:none;user-select:none;-webkit-user-drag:none}
+    .logo-viewer-controls{display:flex;gap:16px;align-items:center;margin-bottom:16px}
+    .logo-viewer-controls label{font-size:13px;font-weight:700;color:var(--muted)}
+    .logo-viewer-controls input[type="range"]{flex:1;cursor:pointer}
+    .logo-viewer-controls .zoom-value{min-width:50px;text-align:right;font-weight:700;color:var(--c1);font-size:14px}
+    .logo-viewer-buttons{display:flex;gap:12px}
+    .logo-viewer-buttons button{flex:1;padding:14px;border-radius:10px;border:none;font-weight:700;cursor:pointer;transition:all 0.2s;font-size:14px}
+    .logo-viewer-buttons .btn-apply{background:var(--c1);color:#fff}
+    .logo-viewer-buttons .btn-apply:hover{background:var(--c2);transform:translateY(-1px)}
+    .logo-viewer-buttons .btn-reset{background:rgba(0,0,0,0.05);color:var(--text)}
+    .logo-viewer-buttons .btn-reset:hover{background:rgba(0,0,0,0.1)}
+    
+    /* Footer Section */
+    .footer{background:var(--panel);border-radius:8px;padding:24px;margin-top:24px;box-shadow:0 2px 8px rgba(0,0,0,0.08);display:flex;gap:16px;justify-content:center;align-items:center}
+    
+    /* Hero Section */
+    .hero{
+      background:linear-gradient(135deg, var(--c1), var(--c2));
+      border-radius:8px;padding:40px;margin-bottom:24px;
+      min-height:200px;display:flex;flex-direction:column;justify-content:center
+    }
+    
+    .hero h1{color:#fff}
+    .hero p{color:rgba(255,255,255,0.9)}
+    .hero button{background:rgba(255,255,255,0.2);color:#fff;backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.3)}
+    .hero button:hover{background:rgba(255,255,255,0.3)}
+    
+    /* Feature Section */
+    .feature{
+      background:var(--panel);border-radius:8px;padding:32px;margin-bottom:24px;
+      box-shadow:0 2px 8px rgba(0,0,0,0.08);display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center
+    }
+    
+    .feature-image{
+      width:100%;aspect-ratio:1;background:linear-gradient(135deg, var(--c2), var(--c3));border-radius:8px;
+      display:flex;align-items:center;justify-content:center;color:#fff;font-weight:600
+    }
+    
+    .feature-text h3{font-size:16px;margin-bottom:12px;font-weight:700;color:var(--c1)}
+    .feature-text p{color:var(--muted);font-size:13px;line-height:1.6}
+    
+    .feature-button{
+      height:36px;background:var(--c1);width:120px;border-radius:4px;margin-top:16px;
+      display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;font-weight:600
+    }
+    
+    /* Carousel Section */
+    .carousel{
+      background:var(--panel);border-radius:8px;padding:32px;margin-bottom:24px;
+      box-shadow:0 2px 8px rgba(0,0,0,0.08)
+    }
+    
+    .carousel-items{
+      display:flex;justify-content:space-around;gap:16px;margin-bottom:24px;
+      overflow-x:auto;padding-bottom:16px
+    }
+    
+    .carousel-item{
+      flex-shrink:0;text-align:center;cursor:pointer;transition:transform 0.2s
+    }
+    
+    .carousel-item:hover{transform:translateY(-4px)}
+    
+    .carousel-dot{
+      width:40px;height:40px;background:var(--c1);border-radius:50%;margin:0 auto 8px;opacity:0.7
+    }
+    
+    .carousel-item:nth-child(2) .carousel-dot{background:var(--c2)}
+    .carousel-item:nth-child(3) .carousel-dot{background:var(--c3)}
+    .carousel-item:nth-child(4) .carousel-dot{background:var(--c1)}
+    .carousel-item:nth-child(5) .carousel-dot{background:var(--c2)}
+    
+    /* Products Section */
+    .products{
+      background:var(--panel);border-radius:8px;padding:32px;margin-bottom:24px;
+      box-shadow:0 2px 8px rgba(0,0,0,0.08)
+    }
+    
+    .products-grid{
+      display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:24px
+    }
+    
+    .product-card{
+      text-align:center;transition:transform 0.2s;cursor:pointer
+    }
+    
+    .product-card:hover{transform:translateY(-4px)}
+    
+    .product-image{
+      width:100%;aspect-ratio:1;background:var(--c1);border-radius:6px;margin-bottom:12px;opacity:0.2
+    }
+    
+    .product-card:nth-child(2) .product-image{background:var(--c2)}
+    .product-card:nth-child(3) .product-image{background:var(--c3)}
+    
+    .quote-section{
+      text-align:center;margin-bottom:24px;padding:32px;background:var(--panel);border-radius:8px;
+      box-shadow:0 2px 8px rgba(0,0,0,0.08)
+    }
+    
+    .quote-mark{font-size:48px;color:var(--c1);margin-bottom:16px;opacity:0.3}
+    .author-row{display:flex;align-items:center;gap:10px;justify-content:center;margin-top:12px}
+    .author-avatar{width:32px;height:32px;border-radius:50%;background:#ddd;flex:0 0 32px;background-size:cover;background-position:center}
+    
+    /* Team Section */
+    .team{
+      background:var(--panel);border-radius:8px;padding:32px;margin-bottom:24px;
+      box-shadow:0 2px 8px rgba(0,0,0,0.08)
+    }
+    
+    .team-grid{
+      display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-bottom:24px
+    }
+    
+    .team-member{
+      text-align:center
+    }
+    
+    .team-avatar{
+      width:60px;height:60px;background:var(--c1);border-radius:50%;margin:0 auto 12px;opacity:0.5;
+      background-size: contain; background-position: center; background-repeat: no-repeat
+    }
+    
+    .team-member:nth-child(2) .team-avatar{background:var(--c2)}
+    .team-member:nth-child(3) .team-avatar{background:var(--c3)}
+    .team-member:nth-child(4) .team-avatar{background:var(--c2)}
+    
+    /* CTA Section */
+    .cta{
+      background:linear-gradient(135deg, var(--c2), var(--c1));border-radius:8px;padding:40px;text-align:center;
+      display:flex;flex-direction:column;gap:16px;align-items:center;color:#fff
+    }
+    
+    .cta h3{color:#fff}
+    .cta p{color:rgba(255,255,255,0.9)}
+    
+    .cta-button{
+      width:140px;height:40px;background:rgba(255,255,255,0.2);border-radius:4px;
+      display:flex;align-items:center;justify-content:center;color:#fff;font-weight:600;
+      backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.3);cursor:pointer
+    }
+    
+    /* Edit Mode */
+    .editable-section{
+      position:relative;
+      cursor:pointer;
+      transition:all 0.2s
+    }
+    
+    .editable-section:hover{
+      box-shadow:0 0 0 2px var(--c1);
+    }
+    
+    .edit-tooltip{
+      position:absolute;top:-32px;right:8px;background:#333;color:#fff;
+      padding:6px 12px;border-radius:4px;font-size:11px;white-space:nowrap;
+      pointer-events:none;opacity:0;transition:opacity 0.2s;z-index:10
+    }
+    
+    .editable-section:hover .edit-tooltip{
+      opacity:1
+    }
+    
+    /* Modal */
+    .modal{
+      display:none;position:fixed;top:0;left:0;width:100%;height:100%;
+      background:rgba(0,0,0,0.5);z-index:1000;align-items:center;justify-content:center
+    }
+    
+    .modal.active{display:flex}
+    
+    .modal-content{
+      background:var(--panel);border-radius:8px;padding:32px;max-width:600px;
+      width:90%;max-height:80vh;overflow-y:auto;position:relative
+    }
+    
+    .modal-close{
+      position:absolute;top:16px;right:16px;background:none;border:none;
+      font-size:24px;cursor:pointer;color:var(--muted2)
+    }
+    
+    .form-group{
+      margin-bottom:20px
+    }
+    
+    .form-group label{
+      display:block;font-weight:700;margin-bottom:8px;font-size:13px;color:var(--muted)
+    }
+    
+    .form-group textarea,
+    .form-group input{
+      width:100%;padding:10px;border:1px solid var(--border);border-radius:6px;
+      font-family:inherit;font-size:14px;resize:vertical
+    }
+    
+    .form-group textarea:focus,
+    .form-group input:focus{
+      outline:none;border-color:var(--c1);box-shadow:0 0 0 3px rgba(14,165,233,0.1)
+    }
+    
+    .form-buttons{
+      display:flex;gap:12px;margin-top:24px
+    }
+    
+    .form-buttons button{
+      flex:1;padding:16px;border:2px solid transparent;border-radius:12px;font-weight:700;
+      cursor:pointer;transition:all 0.3s;text-transform:uppercase;letter-spacing:0.5px;font-size:14px
+    }
+    
+    .btn-save{background:linear-gradient(135deg,#154552,#357a8e);color:#fff;box-shadow:0 8px 20px rgba(21,69,82,0.3)}
+    .btn-save:hover{border:2px solid rgba(255,255,255,0.8);transform:translateY(-2px);box-shadow:0 12px 30px rgba(21,69,82,0.4)}
+    .btn-cancel{background:rgba(255,255,255,0.3);color:var(--text);border:2px solid transparent}
+    .btn-cancel:hover{background:rgba(255,255,255,0.4);border:2px solid rgba(255,255,255,0.8);transform:translateY(-2px)}
+    
+    @media(max-width:768px){
+      .feature{grid-template-columns:1fr}
+      .products-grid,.team-grid{grid-template-columns:repeat(2,1fr)}
+      .carousel-items{flex-wrap:wrap;justify-content:space-around}
+      .header-content{flex-direction:column;align-items:flex-start}
+      .btn-back{background:rgba(255,255,255,0.3);color:#1a1a1a;border:2px solid transparent}
+    }
+    </style>
 </head>
 <body>
   <div class="page">
-    <header>
-      <div class="brand">
-        <div id="brandLogo" class="logo-placeholder">LOGO</div>
-        <div>
-          <h1 id="brandName">Your Brand</h1>
-          <div id="brandOwner" style="color:#475569;font-weight:600;font-size:13px"></div>
+    <!-- Header -->
+    <div class="header">
+      <div class="header-content">
+        <div class="header-left">
+          <div class="logo-wrapper">
+            <div id="navLogo" class="logo" onclick="openLogoViewer()" style="cursor:pointer" title="Click to adjust logo position"></div>
+            <div class="logo-edit-icon" onclick="toggleLogoControls()" title="Adjust logo size">⚙</div>
+          </div>
+          <div class="identity">
+            <span id="metaWebsite" class="logo-name"></span>
+            <span id="ownerName" class="owner-small"></span>
+          </div>
         </div>
-      </div>
-      <div class="pill" id="catalogTag">Catalog: Modern</div>
-    </header>
-
-    <section class="hero">
-      <div>
-        <h2 id="heroTitle">Welcome to Your Brand</h2>
-        <p id="heroSubtitle">We built this preview using your choices: palette, catalog style, product layout, and logo.</p>
-        <div class="cta">
-          <button class="btn btn-primary" onclick="saveSite()">Save</button>
-          <button class="btn btn-primary" onclick="alert('Deploy coming soon')">Launch Site</button>
-          <button class="btn btn-secondary" onclick="window.location.href='product_page_selection.html'">Back</button>
-        </div>
-      </div>
-      <div class="card" style="background:rgba(255,255,255,0.16);backdrop-filter:blur(8px);border-color:rgba(255,255,255,0.3);color:#fff">
-        <h3 style="color:#fff">Palette</h3>
-        <div class="swatches" id="paletteSwatches"></div>
-        <div id="paletteName" style="margin-top:10px;font-weight:700"></div>
-      </div>
-    </section>
-
-    <section class="grid">
-      <div class="card">
-        <h3>Catalog Style</h3>
-        <div class="catalog-preview" id="catalogPreview">Modern Catalog</div>
-        <div class="meta-row" id="catalogMeta"></div>
-      </div>
-
-      <div class="card">
-        <h3>Product Layout</h3>
-        <div class="product-preview" id="productPreview">Grid Layout</div>
-        <div class="meta-row" id="productMeta"></div>
-      </div>
-
-      <div class="card">
-        <h3>Logo</h3>
-        <div style="display:flex;align-items:center;gap:12px">
-          <div id="logoPreview" class="logo-placeholder" style="width:90px;height:90px;font-size:12px"></div>
-          <div style="font-size:14px;color:#475569">
-            <div id="logoStatus">No logo uploaded</div>
-            <div id="appNameText" style="font-weight:700;color:#0f172a;margin-top:4px"></div>
+        <div class="header-right">
+          <nav class="top-nav">
+            <a href="#featureSection">About</a>
+            <a href="#ctaSection">Contact</a>
+          </nav>
+          <div class="header-meta">
+            <div id="metaWebsite" class="website-chip"></div>
+          </div>
+          <div class="hamburger" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <div id="menuPanel" class="menu-panel">
+            <a href="#">Home</a>
+            <a href="#">Language</a>
+            <a href="#">Help</a>
           </div>
         </div>
       </div>
-    </section>
+    </div>
 
-    <footer>
-      <div id="profileInfo">Profile info not set</div>
-      <div>Selections are stored in your browser</div>
-    </footer>
+    <!-- Hero Section -->
+    <div id="heroSection" class="hero editable-section" onclick="editSection('hero')">
+      <div class="edit-tooltip">Click to edit</div>
+      <h1 id="heroTitle" style="font-size:28px;margin-bottom:12px">Welcome to Your Brand</h1>
+      <p id="heroSubtitle" style="line-height:1.7;margin-bottom:16px">We craft modern websites that showcase your products and story with clean layouts and friendly editing.</p>
+      <button style="padding:10px 16px;border:none;border-radius:6px;width:max-content;cursor:pointer;transition:all 0.2s">Explore Products</button>
+    </div>
+
+    <!-- Feature Section -->
+    <div id="featureSection" class="feature editable-section" onclick="editSection('feature')">
+      <div class="edit-tooltip">Click to edit</div>
+      <div id="featureImage" class="feature-image">Image placeholder</div>
+      <div class="feature-text">
+        <h3 id="featureTitle">Why Choose Us</h3>
+        <p id="featureDescription">Simple setup and instant edits. Clean, responsive layouts that look great on any device. Session-based saving so your content stays while you build.</p>
+        <div class="feature-button">Learn More</div>
+      </div>
+    </div>
+
+    <!-- Carousel Section -->
+    <div class="carousel editable-section" onclick="editSection('carousel')">
+      <div class="edit-tooltip">Click to edit</div>
+      <h3 id="carouselTitle" style="margin-bottom:12px;color:#1a1a1a;font-weight:800;font-size:16px">Featured Categories</h3>
+      <div class="carousel-items">
+        <div class="carousel-item"><div id="carouselImg1" class="carousel-dot"></div><div id="carouselItem1" style="font-size:12px;color:#666">New</div></div>
+        <div class="carousel-item"><div id="carouselImg2" class="carousel-dot"></div><div id="carouselItem2" style="font-size:12px;color:#666">Popular</div></div>
+        <div class="carousel-item"><div id="carouselImg3" class="carousel-dot"></div><div id="carouselItem3" style="font-size:12px;color:#666">Sale</div></div>
+        <div class="carousel-item"><div id="carouselImg4" class="carousel-dot"></div><div id="carouselItem4" style="font-size:12px;color:#666">Bundles</div></div>
+        <div class="carousel-item"><div id="carouselImg5" class="carousel-dot"></div><div id="carouselItem5" style="font-size:12px;color:#666">Limited</div></div>
+      </div>
+    </div>
+
+    <!-- Products Section -->
+    <div class="products editable-section" onclick="editSection('products')">
+      <div class="edit-tooltip">Click to edit</div>
+      <h3 id="productsTitle" style="margin-bottom:16px;color:#1a1a1a;font-weight:800;font-size:16px">Our Products</h3>
+      <div class="products-grid">
+        <div class="product-card">
+          <div id="product1Image" class="product-image"></div>
+          <div id="product1Name" style="font-size:13px;color:#333;font-weight:700">Starter Kit</div>
+          <div id="product1Desc" style="font-size:12px;color:#666;margin-bottom:8px">Everything you need to begin</div>
+          <div id="product1Price" style="font-size:14px;color:#0EA5E9;font-weight:800">$29.99</div>
+        </div>
+        <div class="product-card">
+          <div id="product2Image" class="product-image"></div>
+          <div id="product2Name" style="font-size:13px;color:#333;font-weight:700">Pro Bundle</div>
+          <div id="product2Desc" style="font-size:12px;color:#666;margin-bottom:8px">Advanced tools for power users</div>
+          <div id="product2Price" style="font-size:14px;color:#0EA5E9;font-weight:800">$99.99</div>
+        </div>
+        <div class="product-card">
+          <div id="product3Image" class="product-image"></div>
+          <div id="product3Name" style="font-size:13px;color:#333;font-weight:700">Accessories</div>
+          <div id="product3Desc" style="font-size:12px;color:#666;margin-bottom:8px">Add-ons to complement your setup</div>
+          <div id="product3Price" style="font-size:14px;color:#0EA5E9;font-weight:800">$49.99</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quote Section -->
+    <div class="quote-section editable-section" onclick="editSection('quote')">
+      <div class="edit-tooltip">Click to edit</div>
+      <div class="quote-mark">"</div>
+      <div id="quoteText" style="color:var(--muted);max-width:700px;margin:0 auto 8px">This platform made launching our site fast and fun. Editing content is simple and the final result looks professional.</div>
+      <div class="author-row">
+        <div id="quoteAuthorAvatar" class="author-avatar"></div>
+        <div id="quoteAuthor" style="color:var(--muted2);font-style:italic">— Happy Customer</div>
+      </div>
+      <div class="quote-mark" style="transform:scaleX(-1)">"</div>
+    </div>
+
+    <!-- Team Section -->
+    <div class="team editable-section" onclick="editSection('team')">
+      <div class="edit-tooltip">Click to edit</div>
+      <h3 id="teamTitle" style="margin-bottom:16px;color:#1a1a1a;font-weight:800;font-size:16px">Meet Our Team</h3>
+      <div class="team-grid">
+        <div class="team-member">
+          <div id="member1Avatar" class="team-avatar"></div>
+          <div id="member1Name" style="font-size:12px;color:#333;font-weight:700">Narjes Almasri</div>
+          <div id="member1Role" style="font-size:12px;color:#666">Founder</div>
+        </div>
+        <div class="team-member">
+          <div id="member2Avatar" class="team-avatar"></div>
+          <div id="member2Name" style="font-size:12px;color:#333;font-weight:700">Leen Almahthi</div>
+          <div id="member2Role" style="font-size:12px;color:#666">Designer</div>
+        </div>
+        <div class="team-member">
+          <div id="member3Avatar" class="team-avatar"></div>
+          <div id="member3Name" style="font-size:12px;color:#333;font-weight:700">Amr Alali</div>
+          <div id="member3Role" style="font-size:12px;color:#666">App Developer</div>
+        </div>
+        <div class="team-member">
+          <div id="member4Avatar" class="team-avatar"></div>
+          <div id="member4Name" style="font-size:12px;color:#333;font-weight:700">Mahmood</div>
+          <div id="member4Role" style="font-size:12px;color:#666">Backend Developer</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA Section -->
+    <div id="ctaSection" class="cta editable-section" onclick="editSection('cta')">
+      <div class="edit-tooltip">Click to edit</div>
+      <h3 id="ctaTitle" style="margin-bottom:8px;font-size:16px">Ready to get started?</h3>
+      <p id="ctaDescription" style="margin-bottom:8px">Build your brand page and showcase products in minutes.</p>
+      <div class="cta-button">Get Started</div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <button class="btn-back" onclick="window.open('final_preview.html', '_blank')">Preview Live Site</button>
+      <button id="evaluationBtn" class="header-button" onclick="requestAdminEvaluation()">Admin Evaluation</button>
+    </div>
+  </div>
+
+  <!-- Notification -->
+  <div id="notification" class="notification">
+    <div class="notification-header">
+      <div class="notification-title"><span>✓</span> Request Submitted</div>
+      <button class="notification-close" onclick="hideNotification()">×</button>
+    </div>
+    <div class="notification-body">
+      Your website will be reviewed by our team.<br>
+      We will respond within the upcoming 24 hours.
+    </div>
+  </div>
+
+  <!-- Logo Viewer Modal -->
+  <div id="logoViewerModal" class="logo-viewer-modal">
+    <div class="logo-viewer-content">
+      <div class="logo-viewer-header">
+        <h3>🖼️ Adjust Logo Position & Zoom</h3>
+        <button class="logo-viewer-close" onclick="closeLogoViewer()">×</button>
+      </div>
+      <div id="logoViewerCanvas" class="logo-viewer-canvas">
+        <img id="logoViewerImage" class="logo-viewer-image" src="" alt="Logo">
+      </div>
+      <div class="logo-viewer-controls">
+        <label>Zoom:</label>
+        <input type="range" id="logoZoomSlider" min="50" max="300" value="100" step="5">
+        <span class="zoom-value" id="zoomValue">100%</span>
+      </div>
+      <div class="logo-viewer-buttons">
+        <button class="btn-reset" id="logoCenterBtn">Center Logo</button>
+        <button class="btn-reset" id="logoResetBtn">Reset Position</button>
+        <button class="btn-apply" id="logoApplyBtn">Apply Changes</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Logo Controls Panel -->
+  <div id="logoControls" class="logo-controls">
+    <h4>Adjust Logo</h4>
+    <div class="logo-control-group">
+      <label>Size: <span class="value-display" id="logoSizeDisplay">48px</span></label>
+      <input type="range" id="logoSizeSlider" min="30" max="100" value="48" step="2">
+    </div>
+    <div class="logo-control-group">
+      <label>Border Radius: <span class="value-display" id="logoBorderDisplay">50%</span></label>
+      <input type="range" id="logoBorderSlider" min="0" max="150" value="50" step="5">
+    </div>
+    <div class="logo-control-group">
+      <label>Change Logo:</label>
+      <input type="file" id="logoUploadInput" accept="image/*" style="display:none">
+      <button class="btn-upload" onclick="document.getElementById('logoUploadInput').click()">Upload New Logo</button>
+    </div>
+    <button class="btn-close" onclick="toggleLogoControls()">Close</button>
+  </div>
+
+  <!-- Edit Modal -->
+  <div class="modal" id="editModal">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeModal()">×</button>
+      <h2 id="modalTitle" style="margin-bottom:24px;font-size:20px"></h2>
+      <div id="modalForm"></div>
+      <div id="modalHelp" style="margin-top:20px;padding:16px;background:#f0f7ff;border-radius:6px;border-left:4px solid var(--c1);font-size:13px;color:var(--text)"></div>
+    </div>
   </div>
 
   <script>
-    const defaultPalette = ['#0EA5E9','#7C4DFF','#06D6A0'];
-    const catalogMap = {
-      modern: {title:'Modern Catalog', desc:'Clean, minimalist design with focus on products.'},
-      classic: {title:'Classic Catalog', desc:'Elegant typography and structured layouts.'},
-      creative: {title:'Creative Catalog', desc:'Bold, colorful, expressive grids.'}
-    };
-    const productMap = {
-      grid: {title:'Grid Layout', desc:'Clean grid to browse quickly.'},
-      carousel: {title:'Carousel View', desc:'Highlight featured items in motion.'},
-      detailed: {title:'Detailed View', desc:'Large images with rich descriptions.'}
+    let currentSection = '';
+    let imageStore = JSON.parse(sessionStorage.getItem('pageImages')||'{}');
+    
+    const sectionData = {
+      hero: {
+        title: 'Hero Section',
+        fields: [
+          {name: 'Title', id: 'heroTitle'},
+          {name: 'Subtitle', id: 'heroSubtitle'},
+        ],
+        help: '<strong>💡 Tips:</strong><br>• <strong>Title:</strong> Your main headline (e.g., "Welcome to Our Brand")<br>• <strong>Subtitle:</strong> A short compelling statement about your business'
+      },
+      feature: {
+        title: 'Feature Section',
+        fields: [
+          {name: 'Title', id: 'featureTitle'},
+          {name: 'Description', id: 'featureDescription'},
+          {name: 'Image', id: 'featureImage', type: 'image'}
+        ],
+        help: '<strong>💡 Tips:</strong><br>• <strong>Title:</strong> Feature name (e.g., "Why Choose Us?")<br>• <strong>Description:</strong> Explain the benefit or advantage in 2-3 sentences'
+      },
+      carousel: {
+        title: 'Carousel Section',
+        fields: [
+          {name: 'Section Title', id: 'carouselTitle'},
+          {name: 'Item 1 Name', id: 'carouselItem1'},
+          {name: 'Item 2 Name', id: 'carouselItem2'},
+          {name: 'Item 3 Name', id: 'carouselItem3'},
+          {name: 'Item 4 Name', id: 'carouselItem4'},
+          {name: 'Item 5 Name', id: 'carouselItem5'},
+          {name: 'Item 1 Image', id: 'carouselImg1', type: 'image'},
+          {name: 'Item 2 Image', id: 'carouselImg2', type: 'image'},
+          {name: 'Item 3 Image', id: 'carouselImg3', type: 'image'},
+          {name: 'Item 4 Image', id: 'carouselImg4', type: 'image'},
+          {name: 'Item 5 Image', id: 'carouselImg5', type: 'image'}
+        ],
+        help: '<strong>💡 Tips:</strong><br>• <strong>Title:</strong> What is this section about? (e.g., "Featured Brands", "Our Services")<br>• <strong>Items:</strong> Names of carousel items (e.g., client names, service names)'
+      },
+      products: {
+        title: 'Products Section',
+        fields: [
+          {name: 'Section Title', id: 'productsTitle'},
+          {name: 'Product 1 Name', id: 'product1Name'},
+          {name: 'Product 1 Description', id: 'product1Desc'},
+          {name: 'Product 1 Price', id: 'product1Price'},
+          {name: 'Product 2 Name', id: 'product2Name'},
+          {name: 'Product 2 Description', id: 'product2Desc'},
+          {name: 'Product 2 Price', id: 'product2Price'},
+          {name: 'Product 3 Name', id: 'product3Name'},
+          {name: 'Product 3 Description', id: 'product3Desc'},
+          {name: 'Product 3 Price', id: 'product3Price'},
+          {name: 'Product 1 Image', id: 'product1Image', type: 'image'},
+          {name: 'Product 2 Image', id: 'product2Image', type: 'image'},
+          {name: 'Product 3 Image', id: 'product3Image', type: 'image'}
+        ],
+        help: '<strong>💡 Tips:</strong><br>• <strong>Title:</strong> e.g., "Our Products", "What We Offer"<br>• <strong>Product Names:</strong> Name of each product/service you want to showcase<br>• <strong>Price:</strong> e.g., "$29.99", "Free", "Contact us"'
+      },
+      quote: {
+        title: 'Customer Testimonial',
+        fields: [
+          {name: 'Quote Text', id: 'quoteText'},
+          {name: 'Author Name', id: 'quoteAuthor'},
+          {name: 'Author Photo', id: 'quoteAuthorAvatar', type: 'image'}
+        ],
+        help: '<strong>💡 Tips:</strong><br>• <strong>Quote:</strong> Real customer feedback (e.g., "This product changed my life!")<br>• <strong>Author:</strong> Customer name and title (e.g., "— Sarah Johnson, CEO")'
+      },
+      team: {
+        title: 'Team Section',
+        fields: [
+          {name: 'Section Title', id: 'teamTitle'},
+          {name: 'Member 1 Name', id: 'member1Name'},
+          {name: 'Member 1 Role', id: 'member1Role'},
+          {name: 'Member 2 Name', id: 'member2Name'},
+          {name: 'Member 2 Role', id: 'member2Role'},
+          {name: 'Member 3 Name', id: 'member3Name'},
+          {name: 'Member 3 Role', id: 'member3Role'},
+          {name: 'Member 4 Name', id: 'member4Name'},
+          {name: 'Member 4 Role', id: 'member4Role'},
+          {name: 'Member 1 Photo', id: 'member1Avatar', type: 'image'},
+          {name: 'Member 2 Photo', id: 'member2Avatar', type: 'image'},
+          {name: 'Member 3 Photo', id: 'member3Avatar', type: 'image'},
+          {name: 'Member 4 Photo', id: 'member4Avatar', type: 'image'}
+        ],
+        help: '<strong>💡 Tips:</strong><br>• <strong>Title:</strong> e.g., "Meet Our Team"<br>• <strong>Names & Roles:</strong> Team member name and position (e.g., "John Doe, Lead Designer")'
+      },
+      cta: {
+        title: 'Call to Action',
+        fields: [
+          {name: 'Title', id: 'ctaTitle'},
+          {name: 'Description', id: 'ctaDescription'},
+        ],
+        help: '<strong>💡 Tips:</strong><br>• <strong>Title:</strong> Action-oriented (e.g., "Ready to Get Started?")<br>• <strong>Description:</strong> Brief explanation or offer (e.g., "Join 1000+ happy customers today")'
+      }
     };
 
-    function saveSite() {
-      sessionStorage.setItem('siteConfirmed', 'true');
-      sessionStorage.setItem('siteStatusMessage', 'Your website will be generated in the container app. Check it out.');
-      window.location.href = 'thank_you.html';
+    function editSection(section) {
+      currentSection = section;
+      const data = sectionData[section];
+      document.getElementById('modalTitle').textContent = data.title;
+      
+      const form = document.getElementById('modalForm');
+      form.innerHTML = data.fields.map((field, i) => {
+        if (field.type === 'image') {
+          const preview = imageStore[field.id] ? `<div style="width:100%;height:140px;border:1px dashed #ddd;border-radius:6px;background:url('${imageStore[field.id]}') center/cover no-repeat"></div>` : `<div style="width:100%;height:140px;border:1px dashed #ddd;border-radius:6px;display:flex;align-items:center;justify-content:center;color:#999">No image uploaded</div>`;
+          return `
+            <div class="form-group">
+              <label>${field.name}</label>
+              ${preview}
+              <input type="file" id="field-${i}" data-target="${field.id}" accept="image/*" />
+            </div>
+          `;
+        } else {
+          const currentValue = document.getElementById(field.id)?.textContent || '';
+          return `
+            <div class="form-group">
+              <label>${field.name}</label>
+              <textarea rows="3" id="field-${i}" data-target="${field.id}" placeholder="Enter ${field.name.toLowerCase()}">${currentValue}</textarea>
+            </div>
+          `;
+        }
+      }).join('');
+      
+      form.innerHTML += `
+        <div class="form-buttons">
+          <button class="btn-save" onclick="saveSection()">Save Changes</button>
+          <button class="btn-cancel" onclick="closeModal()">Cancel</button>
+        </div>
+      `;
+
+      document.getElementById('modalHelp').innerHTML = data.help;
+      document.getElementById('editModal').classList.add('active');
     }
 
-    function loadSelections() {
-      const appName = sessionStorage.getItem('appName') || 'Your Brand';
-      const logo = sessionStorage.getItem('generatedLogo') || sessionStorage.getItem('uploadedLogo');
-      const profile = sessionStorage.getItem('userProfile');
-      const paletteRaw = sessionStorage.getItem('selectedPalette');
-      const catalog = sessionStorage.getItem('selectedCatalog') || 'modern';
-      const product = sessionStorage.getItem('selectedProductPage') || 'grid';
-
-      const palette = paletteRaw ? JSON.parse(paletteRaw).colors || defaultPalette : defaultPalette;
-      const paletteName = paletteRaw ? JSON.parse(paletteRaw).name || 'Custom Palette' : 'Default Palette';
-
-      // apply palette across page
-      document.documentElement.style.setProperty('--c1', palette[0]);
-      document.documentElement.style.setProperty('--c2', palette[1] || palette[0]);
-      document.body.style.background = `linear-gradient(135deg, ${palette[0]} 0%, ${palette[1] || palette[0]} 100%)`;
-
-      // Brand info
-      document.getElementById('brandName').textContent = appName;
-      document.getElementById('heroTitle').textContent = `Welcome to ${appName}`;
-      document.getElementById('appNameText').textContent = appName;
-
-      if (profile) {
-        const p = JSON.parse(profile);
-        document.getElementById('brandOwner').textContent = `${p.firstName || ''} ${p.lastName || ''}`.trim();
-        document.getElementById('profileInfo').textContent = `${p.firstName || ''} ${p.lastName || ''} · ${p.phone || ''}`;
-      }
-
-      // Logo
-      const logoEl = document.getElementById('brandLogo');
-      const logoPreview = document.getElementById('logoPreview');
-      if (logo) {
-        const img = document.createElement('img');
-        img.src = logo;
-        img.alt = 'Logo';
-        img.style.width = '100%';
-        img.style.height = '100%';
-        img.style.objectFit = 'contain';
-        img.style.borderRadius = '12px';
-        logoEl.innerHTML = '';
-        logoEl.appendChild(img.cloneNode(true));
-        logoPreview.innerHTML = '';
-        logoPreview.appendChild(img);
-        document.getElementById('logoStatus').textContent = 'Uploaded logo applied';
-      } else {
-        document.getElementById('logoStatus').textContent = 'No logo uploaded';
-      }
-
-      // Palette rendering
-      const swatches = document.getElementById('paletteSwatches');
-      swatches.innerHTML = '';
-      palette.slice(0,3).forEach(c => {
-        const sw = document.createElement('div');
-        sw.className = 'swatch';
-        sw.style.background = c;
-        swatches.appendChild(sw);
+    function saveSection() {
+      const data = sectionData[currentSection];
+      const tasks = [];
+      const contentToSave = {};
+      
+      data.fields.forEach((field, i) => {
+        const input = document.getElementById(`field-${i}`);
+        const targetId = input.getAttribute('data-target');
+        const targetElement = document.getElementById(targetId);
+        if (field.type === 'image') {
+          const file = input.files && input.files[0];
+          if (file) {
+            tasks.push(new Promise((resolve) => {
+              const reader = new FileReader();
+              reader.onload = () => {
+                imageStore[targetId] = reader.result;
+                resolve();
+              };
+              reader.readAsDataURL(file);
+            }));
+          }
+        } else {
+          if (targetElement) {
+            const value = input.value.trim();
+            targetElement.textContent = value;
+            contentToSave[targetId] = value;
+          }
+        }
       });
-      document.getElementById('paletteName').textContent = paletteName;
-
-      // apply CSS vars from palette
-      document.documentElement.style.setProperty('--c1', palette[0]);
-      document.documentElement.style.setProperty('--c2', palette[1] || palette[0]);
-
-      // Catalog
-      const catalogData = catalogMap[catalog] || catalogMap.modern;
-      document.getElementById('catalogPreview').textContent = catalogData.title;
-      document.getElementById('catalogMeta').textContent = catalogData.desc;
-      document.getElementById('catalogTag').textContent = `Catalog: ${catalogData.title}`;
-
-      // Product layout
-      const productData = productMap[product] || productMap.grid;
-      document.getElementById('productPreview').textContent = productData.title;
-      document.getElementById('productMeta').textContent = productData.desc;
+      
+      Promise.all(tasks).then(() => {
+        // Save images
+        sessionStorage.setItem('pageImages', JSON.stringify(imageStore));
+        
+        // Save text content
+        const existingContent = JSON.parse(sessionStorage.getItem('pageContent') || '{}');
+        const updatedContent = {...existingContent, ...contentToSave};
+        sessionStorage.setItem('pageContent', JSON.stringify(updatedContent));
+        
+        applyImages();
+        // Any edit should re-activate Admin Evaluation
+        markChangesRequireEvaluation();
+        closeModal();
+      });
     }
 
-    loadSelections();
+    function closeModal() {
+      document.getElementById('editModal').classList.remove('active');
+      currentSection = '';
+    }
+
+    function applyImages(){
+      // Hero BG
+      const heroEl = document.getElementById('heroSection');
+      if (heroEl && imageStore.heroBgImage) {
+        heroEl.style.backgroundImage = `linear-gradient(135deg, var(--c1), var(--c2)), url(${imageStore.heroBgImage})`;
+        heroEl.style.backgroundSize = 'cover';
+        heroEl.style.backgroundPosition = 'center';
+      }
+      // Feature
+      const featImg = document.getElementById('featureImage');
+      if (featImg && imageStore.featureImage) {
+        featImg.style.backgroundImage = `url(${imageStore.featureImage})`;
+        featImg.style.color = 'transparent';
+        featImg.textContent = '';
+        featImg.style.backgroundSize = 'cover';
+        featImg.style.backgroundPosition = 'center';
+      }
+      // Carousel
+      for (let i=1;i<=5;i++){
+        const el = document.getElementById(`carouselImg${i}`);
+        const key = `carouselImg${i}`;
+        if (el && imageStore[key]){
+          el.style.backgroundImage = `url(${imageStore[key]})`;
+          el.style.backgroundSize = 'cover';
+          el.style.backgroundPosition = 'center';
+          el.style.opacity = '1';
+        }
+      }
+      // Products
+      for (let i=1;i<=3;i++){
+        const el = document.getElementById(`product${i}Image`);
+        const key = `product${i}Image`;
+        if (el && imageStore[key]){
+          el.style.backgroundImage = `url(${imageStore[key]})`;
+          el.style.backgroundSize = 'cover';
+          el.style.backgroundPosition = 'center';
+          el.style.opacity = '1';
+        }
+      }
+      // Quote author
+      const qa = document.getElementById('quoteAuthorAvatar');
+      if (qa && imageStore.quoteAuthorAvatar){
+        qa.style.backgroundImage = `url(${imageStore.quoteAuthorAvatar})`;
+      }
+      // Team avatars
+      for (let i=1;i<=4;i++){
+        const el = document.getElementById(`member${i}Avatar`);
+        const key = `member${i}Avatar`;
+        if (el && imageStore[key]){
+          el.style.backgroundImage = `url(${imageStore[key]})`;
+          el.style.backgroundSize = 'contain';
+          el.style.backgroundPosition = 'center';
+          el.style.backgroundRepeat = 'no-repeat';
+          el.style.opacity = '1';
+        }
+      }
+      // CTA BG
+      const ctaEl = document.getElementById('ctaSection');
+      if (ctaEl && imageStore.ctaBgImage){
+        ctaEl.style.backgroundImage = `linear-gradient(135deg, var(--c2), var(--c1)), url(${imageStore.ctaBgImage})`;
+        ctaEl.style.backgroundSize = 'cover';
+        ctaEl.style.backgroundPosition = 'center';
+      }
+    }
+
+    // Initialize with color palette and logo
+    (function initHeader(){
+      const defaultPalette = ['#0EA5E9','#7C4DFF','#06D6A0'];
+      const paletteRaw = sessionStorage.getItem('selectedPalette');
+      let palette = defaultPalette;
+      
+      if (paletteRaw) {
+        try {
+          const parsed = JSON.parse(paletteRaw);
+          if (Array.isArray(parsed.colors) && parsed.colors.length) {
+            palette = parsed.colors;
+          } else if (parsed.primary || parsed.secondary || parsed.tertiary || parsed.color1 || parsed.color2 || parsed.color3) {
+            palette = [
+              parsed.primary || parsed.color1 || defaultPalette[0],
+              parsed.secondary || parsed.color2 || defaultPalette[1],
+              parsed.tertiary || parsed.color3 || defaultPalette[2]
+            ];
+          } else {
+            palette = defaultPalette;
+          }
+        } catch (e) {
+          console.log('Using default palette');
+        }
+      }
+      
+      // Apply colors to CSS variables
+      document.documentElement.style.setProperty('--c1', palette[0]);
+      document.documentElement.style.setProperty('--c2', palette[1] || palette[0]);
+      document.documentElement.style.setProperty('--c3', palette[2] || palette[0]);
+      // Optionally tint neutrals slightly toward primary for cohesion
+      // Keep safe defaults for readability if palette is very dark/saturated
+      const primary = palette[0] || defaultPalette[0];
+      document.documentElement.style.setProperty('--bg', getComputedStyle(document.documentElement).getPropertyValue('--bg') || '#f5f5f5');
+      document.documentElement.style.setProperty('--panel', getComputedStyle(document.documentElement).getPropertyValue('--panel') || '#ffffff');
+      document.documentElement.style.setProperty('--text', getComputedStyle(document.documentElement).getPropertyValue('--text') || '#1a1a1a');
+      document.documentElement.style.setProperty('--muted', getComputedStyle(document.documentElement).getPropertyValue('--muted') || '#666666');
+      document.documentElement.style.setProperty('--border', getComputedStyle(document.documentElement).getPropertyValue('--border') || '#dddddd');
+      
+      // FIXED: Apply logo with corrected background-position
+      const logo = sessionStorage.getItem('generatedLogo') || sessionStorage.getItem('uploadedLogo');
+      const navLogoEl = document.getElementById('navLogo');
+      if (logo && navLogoEl) {
+        const savedZoom = sessionStorage.getItem('logoViewerZoom') || '100';
+        const savedOffsetX = parseFloat(sessionStorage.getItem('logoViewerOffsetX') || '0');
+        const savedOffsetY = parseFloat(sessionStorage.getItem('logoViewerOffsetY') || '0');
+        const scale = parseFloat(savedZoom) / 100;
+        
+        // Clamp restored offsets based on current logo size and zoom
+        const logoSizePx = navLogoEl.offsetWidth || parseInt(getComputedStyle(navLogoEl).width) || 48;
+        const maxOffset = Math.max(8, Math.round(logoSizePx * 0.5 * (scale > 1 ? scale : 1)));
+        const clampedX = Math.max(-maxOffset, Math.min(maxOffset, savedOffsetX));
+        const clampedY = Math.max(-maxOffset, Math.min(maxOffset, savedOffsetY));
+        
+        navLogoEl.style.setProperty('background-image', `url(${logo})`, 'important');
+        navLogoEl.style.setProperty('background-repeat', 'no-repeat', 'important');
+        navLogoEl.style.setProperty('background-size', `${scale * 100}%`, 'important');
+        navLogoEl.style.setProperty('background-position', `calc(50% + ${clampedX}px) calc(50% + ${clampedY}px)`, 'important');
+        navLogoEl.style.setProperty('background-color', 'transparent', 'important');
+      }
+      // apply saved images
+      applyImages();
+      updateIdentity();
+    })();
+
+    function updateEvaluationUI(){
+      const btn = document.getElementById('evaluationBtn');
+      if (!btn) return;
+      const requested = sessionStorage.getItem('adminEvaluationRequested') === 'true';
+      const when = sessionStorage.getItem('adminEvaluationRequestedAt');
+      if (requested){
+        btn.textContent = 'Admin Evaluation Requested ✓';
+        btn.setAttribute('disabled','disabled');
+      } else {
+        btn.textContent = 'Admin Evaluation';
+        btn.removeAttribute('disabled');
+      }
+    }
+
+    // Helper: mark that changes were made, enabling Admin Evaluation
+    function markChangesRequireEvaluation(){
+      try {
+        sessionStorage.setItem('adminEvaluationRequested','false');
+        sessionStorage.removeItem('adminEvaluationRequestedAt');
+        updateEvaluationUI();
+      } catch(e) {}
+    }
+
+    function requestAdminEvaluation(){
+      const profileRaw = sessionStorage.getItem('userProfile');
+      const profile = profileRaw ? JSON.parse(profileRaw) : {};
+      const siteName = profile.websiteName || 'Your Website';
+      const requestData = {
+        siteName: siteName,
+        requestedAt: new Date().toISOString(),
+        status: 'pending_review',
+        userProfile: profile,
+        appName: sessionStorage.getItem('appName') || siteName
+      };
+      sessionStorage.setItem('adminEvaluationRequest', JSON.stringify(requestData));
+      sessionStorage.setItem('adminEvaluationRequested','true');
+      sessionStorage.setItem('adminEvaluationRequestedAt', new Date().toISOString());
+      updateEvaluationUI();
+      showNotification();
+    }
+
+    function showNotification(){
+      const notif = document.getElementById('notification');
+      notif.classList.add('show');
+      setTimeout(() => {
+        hideNotification();
+        setTimeout(() => {
+          window.location.href = 'home_page.html';
+        }, 300);
+      }, 4000);
+    }
+
+    function hideNotification(){
+      const notif = document.getElementById('notification');
+      notif.classList.remove('show');
+    }
+
+    // Initialize evaluation UI on load
+    document.addEventListener('DOMContentLoaded', updateEvaluationUI);
+
+    function updateIdentity(){
+      const websiteEl = document.getElementById('metaWebsite');
+      const ownerEl = document.getElementById('ownerName');
+      let website = '';
+      let userFullName = '';
+      try {
+        const profRaw = sessionStorage.getItem('userProfile');
+        if (profRaw){
+          const prof = JSON.parse(profRaw);
+          website = prof.websiteName || '';
+          const first = prof.firstName || '';
+          const last = prof.lastName || '';
+          userFullName = [first, last].filter(Boolean).join(' ');
+        }
+      } catch(e) {}
+      if (!website) {
+        const appName = sessionStorage.getItem('appName') || '';
+        website = appName;
+      }
+      if (!userFullName) {
+        const user = sessionStorage.getItem('userName') || sessionStorage.getItem('username') || sessionStorage.getItem('user') || '';
+        userFullName = user;
+      }
+      const fallbackSite = 'Website Name';
+      const fallbackOwner = 'Owner Name';
+      if (websiteEl) websiteEl.textContent = website || fallbackSite;
+      if (ownerEl) ownerEl.textContent = userFullName || fallbackOwner;
+    }
+
+    document.addEventListener('DOMContentLoaded', updateIdentity);
+
+    function toggleMenu() {
+      const panel = document.getElementById('menuPanel');
+      if (!panel) return;
+      panel.classList.toggle('active');
+    }
+
+    function toggleLogoControls() {
+      const panel = document.getElementById('logoControls');
+      panel.classList.toggle('active');
+    }
+
+    // Logo Viewer with Pan & Zoom
+    let logoViewerState = {
+      zoom: 100,
+      offsetX: 0,
+      offsetY: 0,
+      isDragging: false,
+      startX: 0,
+      startY: 0
+    };
+
+    function openLogoViewer() {
+      const logo = sessionStorage.getItem('generatedLogo') || sessionStorage.getItem('uploadedLogo');
+      if (!logo) {
+        alert('No logo uploaded yet. Please upload a logo first.');
+        return;
+      }
+
+      const modal = document.getElementById('logoViewerModal');
+      const img = document.getElementById('logoViewerImage');
+      const zoomSlider = document.getElementById('logoZoomSlider');
+      const zoomValue = document.getElementById('zoomValue');
+      
+      // Load saved settings
+      const savedZoom = sessionStorage.getItem('logoViewerZoom') || '100';
+      const savedOffsetX = sessionStorage.getItem('logoViewerOffsetX') || '0';
+      const savedOffsetY = sessionStorage.getItem('logoViewerOffsetY') || '0';
+      
+      logoViewerState.zoom = parseFloat(savedZoom);
+      logoViewerState.offsetX = parseFloat(savedOffsetX);
+      logoViewerState.offsetY = parseFloat(savedOffsetY);
+      
+      img.src = logo;
+      zoomSlider.value = logoViewerState.zoom;
+      zoomValue.textContent = logoViewerState.zoom + '%';
+      
+      updateLogoViewerTransform();
+      modal.classList.add('active');
+    }
+
+    function closeLogoViewer() {
+      const modal = document.getElementById('logoViewerModal');
+      modal.classList.remove('active');
+    }
+
+    function updateLogoViewerTransform() {
+      const img = document.getElementById('logoViewerImage');
+      const scale = logoViewerState.zoom / 100;
+      img.style.transform = `translate(calc(-50% + ${logoViewerState.offsetX}px), calc(-50% + ${logoViewerState.offsetY}px)) scale(${scale})`;
+    }
+
+    function resetLogoPosition() {
+      logoViewerState.offsetX = 0;
+      logoViewerState.offsetY = 0;
+      logoViewerState.zoom = 100;
+      document.getElementById('logoZoomSlider').value = 100;
+      document.getElementById('zoomValue').textContent = '100%';
+      updateLogoViewerTransform();
+    }
+
+    function applyLogoAdjustments() {
+      try {
+        
+        sessionStorage.setItem('logoViewerZoom', logoViewerState.zoom);
+        sessionStorage.setItem('logoViewerOffsetX', logoViewerState.offsetX);
+        sessionStorage.setItem('logoViewerOffsetY', logoViewerState.offsetY);
+        
+        // saved
+        
+        // Apply to the actual logo in header
+        const navLogo = document.getElementById('navLogo');
+        
+        const logo = sessionStorage.getItem('generatedLogo') || sessionStorage.getItem('uploadedLogo');
+        
+        if (!logo) {
+          alert('No logo found in sessionStorage!');
+          return;
+        }
+        
+        if (!navLogo) {
+          alert('Logo element #navLogo not found in DOM!');
+          return;
+        }
+        
+        const scale = logoViewerState.zoom / 100;
+        
+        // Clamp offsets to keep image visible within logo box
+        const logoSizePx = navLogo.offsetWidth || parseInt(getComputedStyle(navLogo).width) || 48;
+        const maxOffset = Math.max(8, Math.round(logoSizePx * 0.5 * (scale > 1 ? scale : 1)));
+        const clampedX = Math.max(-maxOffset, Math.min(maxOffset, logoViewerState.offsetX));
+        const clampedY = Math.max(-maxOffset, Math.min(maxOffset, logoViewerState.offsetY));
+        logoViewerState.offsetX = clampedX;
+        logoViewerState.offsetY = clampedY;
+        
+        // FIXED: Remove quotes from url() and invert offset signs
+        navLogo.style.setProperty('background-image', `url(${logo})`, 'important');
+        navLogo.style.setProperty('background-repeat', 'no-repeat', 'important');
+        navLogo.style.setProperty('background-size', `${scale * 100}%`, 'important');
+        navLogo.style.setProperty('background-position', `calc(50% + ${clampedX}px) calc(50% + ${clampedY}px)`, 'important');
+        navLogo.style.setProperty('background-color', 'transparent', 'important');
+        
+        // Logo change counts as an edit: re-activate Admin Evaluation
+        markChangesRequireEvaluation();
+        
+        closeLogoViewer();
+        alert('✓ Logo adjustments applied!');
+      } catch (error) {
+        console.error('Error in applyLogoAdjustments:', error);
+        alert('Error applying logo: ' + error.message);
+      }
+    }
+
+    // Initialize logo viewer controls
+    (function initLogoViewer() {
+      const canvas = document.getElementById('logoViewerCanvas');
+      const img = document.getElementById('logoViewerImage');
+      const zoomSlider = document.getElementById('logoZoomSlider');
+      const zoomValue = document.getElementById('zoomValue');
+      const resetBtn = document.getElementById('logoResetBtn');
+      const centerBtn = document.getElementById('logoCenterBtn');
+      const applyBtn = document.getElementById('logoApplyBtn');
+
+      // Add button event listeners
+      if (resetBtn) {
+        resetBtn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          resetLogoPosition();
+        });
+      }
+
+      if (centerBtn) {
+        centerBtn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          logoViewerState.offsetX = 0;
+          logoViewerState.offsetY = 0;
+          updateLogoViewerTransform();
+        });
+      }
+
+      if (applyBtn) {
+        applyBtn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          applyLogoAdjustments();
+        });
+      }
+
+      // Zoom slider
+      zoomSlider.addEventListener('input', (e) => {
+        logoViewerState.zoom = parseFloat(e.target.value);
+        zoomValue.textContent = logoViewerState.zoom + '%';
+        updateLogoViewerTransform();
+      });
+
+      // Pan functionality
+      canvas.addEventListener('mousedown', (e) => {
+        logoViewerState.isDragging = true;
+        logoViewerState.startX = e.clientX - logoViewerState.offsetX;
+        logoViewerState.startY = e.clientY - logoViewerState.offsetY;
+        canvas.style.cursor = 'grabbing';
+      });
+
+      document.addEventListener('mousemove', (e) => {
+        if (!logoViewerState.isDragging) return;
+        logoViewerState.offsetX = e.clientX - logoViewerState.startX;
+        logoViewerState.offsetY = e.clientY - logoViewerState.startY;
+        updateLogoViewerTransform();
+      });
+
+      document.addEventListener('mouseup', () => {
+        if (logoViewerState.isDragging) {
+          logoViewerState.isDragging = false;
+          canvas.style.cursor = 'move';
+        }
+      });
+
+      // Close on outside click
+      document.getElementById('logoViewerModal').addEventListener('click', (e) => {
+        if (e.target.id === 'logoViewerModal') {
+          closeLogoViewer();
+        }
+      });
+    })();
+
+    // Logo adjustment controls
+    (function initLogoControls(){
+      const sizeSlider = document.getElementById('logoSizeSlider');
+      const borderSlider = document.getElementById('logoBorderSlider');
+      const sizeDisplay = document.getElementById('logoSizeDisplay');
+      const borderDisplay = document.getElementById('logoBorderDisplay');
+      const logoEl = document.getElementById('navLogo');
+      const uploadInput = document.getElementById('logoUploadInput');
+
+      // Load saved logo settings
+      const savedSize = sessionStorage.getItem('logoSize') || '48';
+      const savedBorder = sessionStorage.getItem('logoBorderRadius') || '50';
+      
+      sizeSlider.value = savedSize;
+      borderSlider.value = savedBorder;
+      applyLogoSettings();
+
+      sizeSlider.addEventListener('input', (e) => {
+        const size = e.target.value;
+        sessionStorage.setItem('logoSize', size);
+        applyLogoSettings();
+        // Editing logo size should activate Admin Evaluation
+        markChangesRequireEvaluation();
+      });
+
+      borderSlider.addEventListener('input', (e) => {
+        const radius = e.target.value;
+        sessionStorage.setItem('logoBorderRadius', radius);
+        applyLogoSettings();
+        // Editing logo border should activate Admin Evaluation
+        markChangesRequireEvaluation();
+      });
+
+      uploadInput.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = function(event) {
+            const dataUrl = event.target.result;
+            sessionStorage.setItem('uploadedLogo', dataUrl);
+            sessionStorage.removeItem('generatedLogo');
+            // Reset viewer adjustments when uploading new logo
+            sessionStorage.removeItem('logoViewerZoom');
+            sessionStorage.removeItem('logoViewerOffsetX');
+            sessionStorage.removeItem('logoViewerOffsetY');
+            applyLogoSettings();
+            // Uploading a new logo is an edit: activate Admin Evaluation
+            markChangesRequireEvaluation();
+            alert('✓ Logo updated successfully!');
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+
+      function applyLogoSettings() {
+        const size = sizeSlider.value;
+        const radius = borderSlider.value;
+        
+        logoEl.style.width = size + 'px';
+        logoEl.style.height = size + 'px';
+        logoEl.style.borderRadius = radius + '%';
+        
+        // FIXED: Re-apply logo background with viewer adjustments
+        const logo = sessionStorage.getItem('generatedLogo') || sessionStorage.getItem('uploadedLogo');
+        if (logo) {
+          const savedZoom = sessionStorage.getItem('logoViewerZoom') || '100';
+          const savedOffsetX = parseFloat(sessionStorage.getItem('logoViewerOffsetX') || '0');
+          const savedOffsetY = parseFloat(sessionStorage.getItem('logoViewerOffsetY') || '0');
+          const scale = parseFloat(savedZoom) / 100;
+          
+          // Clamp offsets relative to current logo size and zoom
+          const logoSizePx = logoEl.offsetWidth || parseInt(getComputedStyle(logoEl).width) || 48;
+          const maxOffset = Math.max(8, Math.round(logoSizePx * 0.5 * (scale > 1 ? scale : 1)));
+          const clampedX = Math.max(-maxOffset, Math.min(maxOffset, savedOffsetX));
+          const clampedY = Math.max(-maxOffset, Math.min(maxOffset, savedOffsetY));
+
+          // FIXED: Remove quotes and use + for offset
+          logoEl.style.setProperty('background-image', `url(${logo})`, 'important');
+          logoEl.style.setProperty('background-repeat', 'no-repeat', 'important');
+          logoEl.style.setProperty('background-size', `${scale * 100}%`, 'important');
+          logoEl.style.setProperty('background-position', `calc(50% + ${clampedX}px) calc(50% + ${clampedY}px)`, 'important');
+          logoEl.style.setProperty('background-color', 'transparent', 'important');
+        }
+        
+        sizeDisplay.textContent = size + 'px';
+        borderDisplay.textContent = radius + '%';
+      }
+    })();
+
+    window.onclick = function(e) {
+      const modal = document.getElementById('editModal');
+      if (e.target === modal) closeModal();
+      // Close menu when clicking outside
+      const panel = document.getElementById('menuPanel');
+      const burger = document.querySelector('.hamburger');
+      if (panel && panel.classList.contains('active')){
+        if (!panel.contains(e.target) && !burger.contains(e.target)){
+          panel.classList.remove('active');
+        }
+      }
+    }
   </script>
 </body>
 </html>

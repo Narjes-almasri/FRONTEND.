@@ -4,83 +4,63 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>App Setup — Generator</title>
-  <style>
-    *{margin:0;padding:0;box-sizing:border-box}
-    body{font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;background:linear-gradient(135deg,#7eb3c4 0%,#9cc9d4 100%);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
-    .container{display:grid;grid-template-columns:1fr 1fr;gap:50px;max-width:1100px;width:100%;align-items:center}
-    .content{background:rgba(255,255,255,0.12);backdrop-filter:blur(10px);padding:60px;border-radius:24px;box-shadow:0 8px 32px rgba(0,0,0,0.1)}
-    .content h1{font-size:42px;margin-bottom:16px;color:#1a1a1a;font-weight:800}
-    .content p{font-size:18px;color:#333;margin-bottom:32px;line-height:1.6}
-    .form-group{margin-bottom:28px}
-    label{display:block;font-size:14px;font-weight:700;color:#1a1a1a;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:12px}
-    input[type="text"]{width:100%;padding:16px 20px;border:2px solid rgba(255,255,255,0.3);border-radius:12px;font-size:16px;transition:all 0.3s ease;background:rgba(255,255,255,0.8)}
-    input[type="text"]:focus{outline:none;border-color:rgba(255,255,255,0.8);background:#fff;box-shadow:0 0 0 4px rgba(126,179,196,0.2)}
-    input[type="text"]::placeholder{color:#999}
-    .btn-container{display:flex;gap:16px;margin-top:40px}
-    .btn{padding:16px 28px;border-radius:12px;border:none;font-weight:700;cursor:pointer;font-size:16px;flex:1;transition:all 0.3s ease;text-transform:uppercase;letter-spacing:0.5px}
-    .btn-primary{background:linear-gradient(135deg,#7eb3c4,#6ba3b4);color:#fff;box-shadow:0 8px 20px rgba(126,179,196,0.3)}
-    .btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(126,179,196,0.4)}
-    .btn-secondary{background:rgba(255,255,255,0.2);color:#1a1a1a;border:2px solid rgba(255,255,255,0.4)}
-    .btn-secondary:hover{background:rgba(255,255,255,0.3);border-color:rgba(255,255,255,0.8)}
-    .error{color:#ef476f;font-size:13px;margin-top:8px;font-weight:600}
-    .upload-section{margin-top:32px;padding:24px;background:rgba(255,255,255,0.08);border-radius:16px;border:2px dashed rgba(255,255,255,0.4)}
-    .upload-section h3{font-size:16px;margin-bottom:16px;color:#1a1a1a;font-weight:700}
-    .upload-btn{display:inline-block;padding:12px 24px;background:rgba(255,255,255,0.9);color:#1a1a1a;border-radius:10px;cursor:pointer;font-weight:600;transition:all 0.3s;border:2px solid transparent}
-    .upload-btn:hover{background:#fff;border-color:#7eb3c4;transform:translateY(-2px)}
-    input[type="file"]{display:none}
-    .preview{margin-top:16px;text-align:center}
-    .preview img{max-width:150px;max-height:150px;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,0.2)}
-    .preview-text{margin-top:8px;font-size:13px;color:#333;font-weight:600}
-    .illustration{display:flex;flex-direction:column;align-items:center;justify-content:center}
-    .icon{font-size:120px;margin-bottom:24px;animation:bounce 3s infinite}
-    .card{background:rgba(255,255,255,0.12);backdrop-filter:blur(10px);padding:32px;border-radius:16px;margin-bottom:20px}
-    .card h3{color:#1a1a1a;margin-bottom:8px;font-size:18px;font-weight:700}
-    .card p{color:#333;font-size:14px;line-height:1.6}
-    @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-    @media (max-width:900px){.container{grid-template-columns:1fr;gap:30px}.content{padding:40px}.content h1{font-size:32px}.illustration{display:none}}
-  </style>
+  <link rel="icon" href="images/website_logo.png" type="image/png"/>
+  <link rel="stylesheet" href="app_setup.css">
 </head>
 <body>
   <div class="container">
     <div class="content">
-      <h1>Logo for <span id="brandName" style="color:#1a1a1a"></span></h1>
-      <p>Do you already have a logo or would you like to customize one?</p>
+      <h1>Create a logo for <span id="brandName" style="background:linear-gradient(135deg,#154552,#357a8e);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-weight:900"></span></h1>
+      <p>Create a logo for your brand</p>
 
       <div id="error" class="error"></div>
 
-      <div class="upload-section" style="margin-top:24px;margin-bottom:24px">
-        <h3>📤 Upload Your Own Logo</h3>
-        <p style="font-size:14px;color:#666;margin:12px 0">Already have a logo? Upload it here</p>
-        <label for="logoUpload" class="upload-btn">📁 Choose Image</label>
-        <input type="file" id="logoUpload" accept="image/*">
-        <div id="preview" class="preview" style="display:none">
-          <img id="previewImg" src="" alt="Logo preview">
-          <div class="preview-text">✓ Logo uploaded successfully!</div>
-          <button type="button" class="btn btn-primary" onclick="continueWithUploadedLogo()" style="margin-top:16px;width:100%">Continue →</button>
+      <div class="options-container">
+        <div class="option-card">
+          <div class="option-icon">🎨</div>
+          <h3>Start Customizing Your Own Logo</h3>
+          <p>Create a custom logo using our design tools</p>
+          <button type="button" class="btn btn-primary" onclick="customizeLogo()" style="width:100%;margin-top:16px">Start Designing →</button>
+        </div>
+
+        <div class="divider-vertical">OR</div>
+
+        <div class="option-card">
+          <div class="option-icon">📤</div>
+          <h3>Upload Existing Logo</h3>
+          <p>Already have a logo? Use it directly</p>
+          <label for="logoUpload" class="btn btn-primary" style="width:100%;margin-top:16px;display:block;text-align:center">Choose File →</label>
+          <input type="file" id="logoUpload" accept="image/*">
         </div>
       </div>
 
-      <div style="text-align:center;margin:32px 0;color:#666;font-weight:700">OR</div>
+      <div id="preview" class="preview-container" style="display:none">
+        <div class="preview-content">
+          <h3 style="margin-bottom:16px;color:#1a1a1a">Logo Preview</h3>
+          <img id="previewImg" src="" alt="Logo preview" class="preview-img">
+          <div class="preview-text">✓ Logo uploaded successfully!</div>
+          <button type="button" class="btn btn-primary" onclick="continueWithUploadedLogo()" style="width:100%;margin-top:16px">Continue</button>
+        </div>
+      </div>
 
-      <div class="btn-container" style="margin-top:24px">
-        <button type="button" class="btn btn-secondary" onclick="goBack()">← Back</button>
-        <button type="button" class="btn btn-primary" onclick="customizeLogo()">🎨 Customize Logo →</button>
+      <div class="btn-container" style="margin-top:40px">
+        <button type="button" class="btn btn-secondary" onclick="goBack()">Back</button>
       </div>
     </div>
 
     <div class="illustration">
-      <div class="icon">🎨</div>
+      <div class="icon">✨</div>
       <div class="card">
-        <h3>✨ Design Freedom</h3>
-        <p>Create your logo with intuitive tools. Add shapes, colors, and text.</p>
+        <h3>Design Freedom</h3>
+        <p>Intuitive tools to create your perfect logo with shapes, colors, and text.</p>
       </div>
       <div class="card">
-        <h3>🚀 Ready to Use</h3>
-        <p>Download your logo and use it everywhere—website, app, social media.</p>
+        <h3>Quick Start</h3>
+        <p>Upload existing artwork or design from scratch in minutes.</p>
       </div>
       <div class="card">
-        <h3>💡 Your Brand</h3>
-        <p>Make it uniquely yours. No templates, pure creativity.</p>
+        <h3>Your Brand</h3>
+        <p>Make it uniquely yours. Full creative control, no templates.</p>
       </div>
     </div>
   </div>
@@ -107,6 +87,7 @@
           // Save logo immediately
           sessionStorage.setItem('appName', appName);
           sessionStorage.setItem('uploadedLogo', uploadedLogo);
+          sessionStorage.removeItem('generatedLogo');
           
           errorDiv.style.color = '#06D6A0';
           errorDiv.textContent = '✓ Your logo has been saved successfully!';
@@ -121,28 +102,26 @@
 
     function customizeLogo() {
       sessionStorage.setItem('appName', appName);
+      sessionStorage.removeItem('uploadedLogo');
       window.location.href = 'generation.html';
     }
 
     function continueWithUploadedLogo() {
-      // Logo already saved, navigate to catalog selection
-      window.location.href = 'catalog_selection.html';
+      // Logo already saved, navigate to build preview
+      window.location.href = 'build_preview.html';
     }
 
     function goBack() {
-      window.location.href = 'post_login.html';
+      window.location.href = 'color_palette.html';
     }
 
     window.addEventListener('load', () => {
-      // Get website name from profile data
       const userProfile = sessionStorage.getItem('userProfile');
       if (userProfile) {
         const profile = JSON.parse(userProfile);
         appName = profile.websiteName || 'Your Brand';
-        brandNameEl.textContent = appName;
-      } else {
-        brandNameEl.textContent = 'Your Brand';
       }
+      brandNameEl.textContent = appName;
     });
   </script>
 </body>

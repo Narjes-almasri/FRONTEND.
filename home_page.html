@@ -2,758 +2,45 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tap to Build — Home</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-  <style>
-    @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-20px); }
-    }
-    
-    @keyframes glow {
-      0%, 100% { box-shadow: 0 0 20px rgba(126, 179, 196, 0.3); }
-      50% { box-shadow: 0 0 40px rgba(126, 179, 196, 0.6); }
-    }
-    
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-    
-    @keyframes fadeInDown {
-      from {
-        opacity: 0;
-        transform: translateY(-30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-    
-    @keyframes slideInLeft {
-      from {
-        opacity: 0;
-        transform: translateX(-50px);
-      }
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
-    
-    @keyframes slideInRight {
-      from {
-        opacity: 0;
-        transform: translateX(50px);
-      }
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
-    
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.5; }
-    }
-    
-    @keyframes gradientShift {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-    
-    @keyframes textGlow {
-      0%, 100% { text-shadow: 0 0 10px rgba(0, 212, 255, 0.5); }
-      50% { text-shadow: 0 0 30px rgba(0, 212, 255, 0.9); }
-    }
-    
-    @keyframes cardFlip {
-      0% {
-        transform: translateY(0) rotateX(0) rotateY(0) scale(1);
-        box-shadow: 0 10px 30px rgba(126, 179, 196, 0.2);
-      }
-      50% {
-        transform: translateY(-15px) rotateX(5deg) rotateY(5deg) scale(1.08);
-        box-shadow: 0 35px 100px rgba(126, 179, 196, 0.6);
-      }
-      100% {
-        transform: translateY(-10px) rotateX(0) rotateY(0) scale(1.05);
-        box-shadow: 0 25px 80px rgba(126, 179, 196, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.3);
-      }
-    }
-
-    @keyframes stepPop {
-      0% {
-        transform: scale(1) translateY(0);
-        box-shadow: 0 8px 20px rgba(126, 179, 196, 0.15);
-      }
-      40% {
-        transform: scale(1.12) translateY(-10px) rotateX(6deg);
-        box-shadow: 0 45px 120px rgba(126, 179, 196, 0.65);
-      }
-      70% {
-        transform: scale(1.06) translateY(-6px) rotateX(2deg);
-        box-shadow: 0 30px 90px rgba(126, 179, 196, 0.5);
-      }
-      100% {
-        transform: scale(1.05) translateY(-6px) rotateX(0deg);
-        box-shadow: 0 25px 80px rgba(126, 179, 196, 0.45), inset 0 1px 0 rgba(255,255,255,0.25);
-      }
-    }
-
-    @keyframes contentShift {
-      0% {
-        transform: translateY(0);
-        opacity: 0.95;
-      }
-      100% {
-        transform: translateY(-8px);
-        opacity: 1;
-      }
-    }
-    
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    
-    body {
-      font-family: 'Inter', sans-serif;
-      background: linear-gradient(135deg, #7eb3c4 0%, #9cc9d4 100%);
-      color: #0a1929;
-      overflow-x: hidden;
-    }
-    
-    nav {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      padding: 20px 40px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      z-index: 1000;
-      background: rgba(10, 25, 41, 0.8);
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid rgba(126, 179, 196, 0.1);
-    }
-    
-    .logo {
-      font-size: 1.3rem;
-      font-weight: 900;
-      background: linear-gradient(135deg, #7eb3c4, #9cc9d4);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      animation: textGlow 3s ease-in-out infinite;
-    }
-    
-    .nav-links {
-      display: flex;
-      gap: 30px;
-      align-items: center;
-    }
-    
-    .nav-links a {
-      color: rgba(255, 255, 255, 0.7);
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.3s;
-      position: relative;
-      padding-bottom: 5px;
-    }
-    
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: #9cc9d4;
-      transition: width 0.3s;
-    }
-    
-    .nav-links a:hover::after {
-      width: 100%;
-    }
-    
-    .nav-account {
-      padding: 10px 24px;
-      background: linear-gradient(135deg, #7eb3c4, #9cc9d4);
-      color: #0a1929;
-      border-radius: 8px;
-      font-weight: 600;
-      transition: all 0.3s;
-    }
-    
-    .nav-account:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 5px 20px rgba(126, 179, 196, 0.4);
-    }
-    
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 0 20px;
-      position: relative;
-      background: radial-gradient(ellipse at center, #1a3a52 0%, #9cc9d4 70%);
-      overflow: hidden;
-      margin-top: 0;
-      padding-top: 60px;
-    }
-    
-    .grid-background {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: 
-        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-      background-size: 50px 50px;
-      pointer-events: none;
-    }
-    
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      max-width: 900px;
-    }
-    
-    .hero h1 {
-      font-size: 5rem;
-      font-weight: 900;
-      line-height: 1.1;
-      margin-bottom: 30px;
-      background: linear-gradient(135deg, #ffffff 0%, #7eb3c4 50%, #9cc9d4 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      animation: fadeInDown 1s ease-out, textGlow 3s ease-in-out infinite 0.5s;
-    }
-    
-    .hero p {
-      font-size: 1.4rem;
-      color: rgba(255, 255, 255, 0.9);
-      margin-bottom: 50px;
-      line-height: 1.75;
-      animation: fadeInUp 1s ease-out 0.3s backwards;
-    }
-    
-    .hero-buttons {
-      display: flex;
-      gap: 20px;
-      justify-content: center;
-      flex-wrap: wrap;
-      animation: fadeInUp 1s ease-out 0.6s backwards;
-    }
-    
-    .btn-primary {
-      background: linear-gradient(135deg, #7eb3c4, #9cc9d4);
-      padding: 18px 40px;
-      border-radius: 12px;
-      color: #0a1929;
-      text-decoration: none;
-      font-weight: 700;
-      font-size: 1.1rem;
-      transition: all 0.3s;
-      box-shadow: 0 10px 40px rgba(126, 179, 196, 0.3);
-      cursor: pointer;
-      border: none;
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .btn-primary::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: rgba(255, 255, 255, 0.2);
-      transition: left 0.5s;
-    }
-    
-    .btn-primary:hover::before {
-      left: 100%;
-    }
-    
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 15px 50px rgba(126, 179, 196, 0.5);
-    }
-    
-    .btn-secondary {
-      padding: 18px 40px;
-      border-radius: 12px;
-      background: transparent;
-      color: #0a1929;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 1.1rem;
-      border: 2px solid rgba(10, 25, 41, 0.08);
-      transition: all 0.3s;
-      cursor: pointer;
-      animation: fadeInUp 1s ease-out 0.6s backwards;
-    }
-    
-    .btn-secondary:hover {
-      border-color: #9cc9d4;
-      background: rgba(126, 179, 196, 0.1);
-    }
-    
-    .features {
-      padding: 120px 40px;
-      background: linear-gradient(180deg, #9cc9d4 0%, #7eb3c4 100%);
-      color: #0a1929;
-    }
-    
-    .features-grid {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 30px;
-    }
-    
-    .feature-card {
-      background: rgba(255,255,255,0.7);
-      border: 1px solid rgba(10, 25, 41, 0.06);
-      border-radius: 20px;
-      padding: 40px;
-      transition: all 0.3s;
-      backdrop-filter: blur(6px);
-      animation: fadeInUp 1s ease-out forwards;
-      color: #0a1929;
-    }
-    
-    .feature-card:nth-child(1) { animation-delay: 0.2s; }
-    .feature-card:nth-child(2) { animation-delay: 0.4s; }
-    .feature-card:nth-child(3) { animation-delay: 0.6s; }
-    
-    .feature-card:hover {
-      animation: cardFlip 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-      border-color: rgba(126, 179, 196, 0.9);
-    }
-    
-    .feature-icon {
-      font-size: 3rem;
-      margin-bottom: 20px;
-      display: block;
-      animation: float 3s ease-in-out infinite;
-    }
-    
-    .feature-card h3 {
-      font-size: 1.5rem;
-      margin-bottom: 15px;
-      font-weight: 700;
-    }
-    
-    .feature-card p {
-      color: rgba(10, 25, 41, 0.88);
-      line-height: 1.75;
-      font-size: 1rem;
-    }
-    
-    .showcase {
-      padding: 120px 40px;
-      background: linear-gradient(180deg, #9cc9d4 0%, #7eb3c4 100%);
-      text-align: center;
-      color: #0a1929;
-    }
-    
-    .showcase h2 {
-      font-size: 3rem;
-      font-weight: 800;
-      margin-bottom: 20px;
-      animation: fadeInDown 1s ease-out;
-    }
-    
-    .showcase p {
-      color: rgba(10, 25, 41, 0.9);
-      font-size: 1.2rem;
-      margin-bottom: 60px;
-      animation: fadeInUp 1s ease-out 0.2s backwards;
-      line-height: 1.7;
-    }
-    
-    .showcase-container {
-      max-width: 1000px;
-      margin: 0 auto;
-      perspective: 1000px;
-    }
-    
-    .showcase-box {
-      background: linear-gradient(135deg, rgba(126, 179, 196, 0.1), rgba(156, 201, 212, 0.1));
-      border: 1px solid rgba(126, 179, 196, 0.3);
-      border-radius: 20px;
-      width: 1024px;
-      height: 768px;
-      margin: 0 auto;
-      position: relative;
-      overflow: hidden;
-      box-shadow: 0 30px 90px rgba(126, 179, 196, 0.2);
-      transition: transform 0.3s;
-      animation: fadeInUp 1s ease-out 0.4s backwards;
-    }
-    
-    .showcase-box:hover {
-      transform: rotateX(2deg) rotateY(2deg) scale(1.02);
-      box-shadow: 0 40px 120px rgba(126, 179, 196, 0.4);
-    }
-    
-    .showcase-header {
-      background: rgba(126, 179, 196, 0.1);
-      padding: 15px 20px;
-      border-bottom: 1px solid rgba(126, 179, 196, 0.2);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .preview-device {
-      width: 86%;
-      height: calc(100% - 60px);
-      margin: 18px auto 20px;
-      background: #ffffff;
-      border-radius: 12px;
-      box-shadow: 0 30px 60px rgba(10, 25, 41, 0.06);
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      border: 1px solid rgba(10,25,41,0.04);
-    }
-
-    .device-header {
-      height: 48px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 0 12px;
-      background: linear-gradient(90deg, rgba(250,250,250,1), rgba(245,250,250,1));
-      border-bottom: 1px solid rgba(10,25,41,0.03);
-    }
-
-    .device-dots { display:flex; gap:8px; }
-    .device-dot { width:12px; height:12px; border-radius:50%; display:block; }
-
-    .device-screen {
-      flex: 1;
-      padding: 18px;
-      background: linear-gradient(180deg,#fbfeff,#f3fafb);
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      color: #0a1929;
-    }
-
-    .app-top { display:flex; align-items:center; justify-content:space-between; }
-    .app-title { font-weight:700; font-size:1.05rem; color:#0a1929; }
-
-    .app-cards { display:flex; gap:12px; align-items:flex-start; }
-    .app-card-mini {
-      flex: 1;
-      min-width: 0;
-      background: linear-gradient(180deg,#ffffff,#f8fbfb);
-      border-radius:10px;
-      padding:12px;
-      box-shadow: 0 8px 30px rgba(10,25,41,0.04);
-      border: 1px solid rgba(10,25,41,0.03);
-    }
-
-    .app-card-mini h4 { margin-bottom:8px; font-size:0.95rem; color:#0a1929; }
-    .app-card-mini p { font-size:0.85rem; color:rgba(10,25,41,0.7); line-height:1.3 }
-
-    /* Image preview inside the device */
-    .preview-image {
-      width: 100%;
-      height: 708px;
-      object-fit: cover;
-      border-radius: 0;
-      display: block;
-      border: none;
-      box-shadow: none;
-    }
-
-    @media (max-width: 768px) {
-      .showcase-box {
-        width: 90%;
-        height: 480px;
-      }
-      .preview-image { height: 420px; }
-    }
-
-    /* Make preview stand out on hover */
-    .showcase-box:hover .preview-device { transform: translateY(-6px); box-shadow: 0 45px 110px rgba(10,25,41,0.08); }
-    
-    .dot {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.3);
-    }
-    
-    .how {
-      padding: 120px 40px;
-      background: linear-gradient(180deg, #9cc9d4 0%, #7eb3c4 100%);
-      text-align: center;
-      color: #0a1929;
-    }
-    
-    .how h2 {
-      font-size: 3rem;
-      font-weight: 800;
-      margin-bottom: 80px;
-      animation: fadeInDown 1s ease-out;
-    }
-    
-    .steps {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 40px;
-    }
-    
-    .step {
-      position: relative;
-      animation: fadeInUp 1s ease-out forwards;
-      transition: transform 0.28s ease, box-shadow 0.28s ease;
-    }
-    
-    .step:nth-child(1) { animation-delay: 0.2s; }
-    .step:nth-child(2) { animation-delay: 0.4s; }
-    .step:nth-child(3) { animation-delay: 0.6s; }
-    .step:nth-child(4) { animation-delay: 0.8s; }
-    
-    .step-number {
-      width: 60px;
-      height: 60px;
-      background: linear-gradient(135deg, #7eb3c4, #9cc9d4);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 800;
-      font-size: 1.5rem;
-      margin: 0 auto 20px;
-      color: #0a1929;
-      box-shadow: 0 10px 30px rgba(126, 179, 196, 0.3);
-      animation: glow 2s ease-in-out infinite;
-      transition: transform 0.3s;
-    }
-    
-    .step:hover .step-number {
-      animation: stepPop 0.65s cubic-bezier(0.2, 1, 0.3, 1) forwards;
-      transform-origin: center;
-      will-change: transform, box-shadow;
-    }
-    
-    .step-content {
-      font-size: 1.2rem;
-      font-weight: 600;
-      color: rgba(10, 25, 41, 0.95);
-      transition: color 0.25s, transform 0.25s;
-      will-change: transform, color;
-    }
-
-    .step:hover .step-content {
-      color: #0a1929;
-      font-weight: 700;
-      animation: contentShift 0.45s ease-out forwards;
-      text-shadow: 0 1px 0 rgba(255,255,255,0.6);
-    }
-
-    .step:hover {
-      transform: translateY(-6px);
-      z-index: 6;
-    }
-    
-    .about {
-      padding: 120px 40px;
-      background: linear-gradient(180deg, #9cc9d4 0%, #7eb3c4 100%);
-      color: #0a1929;
-    }
-    
-    .about-content {
-      max-width: 900px;
-      margin: 0 auto;
-      text-align: center;
-    }
-    
-    .about h2 {
-      font-size: 3rem;
-      font-weight: 800;
-      margin-bottom: 30px;
-      animation: fadeInDown 1s ease-out;
-    }
-    
-    .about p {
-      font-size: 1.2rem;
-      color: rgba(10, 25, 41, 0.9);
-      line-height: 1.9;
-      margin-bottom: 20px;
-      animation: fadeInUp 1s ease-out backwards;
-    }
-    
-    .about p:nth-of-type(1) { animation-delay: 0.2s; }
-    .about p:nth-of-type(2) { animation-delay: 0.4s; }
-    
-    footer {
-      padding: 80px 40px 40px;
-      background: linear-gradient(180deg, #9cc9d4 0%, #7eb3c4 100%);
-      border-top: 1px solid rgba(10, 25, 41, 0.06);
-      color: #0a1929;
-    }
-    
-    .footer-content {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 40px;
-      margin-bottom: 60px;
-    }
-    
-    .footer-section h3 {
-      font-size: 1.2rem;
-      margin-bottom: 20px;
-      color: #0a1929;
-      animation: slideInLeft 0.6s ease-out;
-    }
-    
-    .footer-section ul {
-      list-style: none;
-    }
-    
-    .footer-section li {
-      margin-bottom: 12px;
-    }
-    
-    .footer-section a {
-      color: rgba(10, 25, 41, 0.85);
-      text-decoration: none;
-      transition: color 0.3s;
-      font-size: 0.95rem;
-    }
-    
-    .footer-section a:hover {
-      color: #0a1929;
-      text-decoration: underline;
-    }
-    
-    .footer-section p {
-      color: rgba(10, 25, 41, 0.85);
-      line-height: 1.6;
-      font-size: 0.95rem;
-    }
-    
-    .footer-bottom {
-      text-align: center;
-      padding-top: 30px;
-      border-top: 1px solid rgba(10, 25, 41, 0.06);
-      color: rgba(10, 25, 41, 0.6);
-      font-size: 0.9rem;
-    }
-    
-    .social-links {
-      display: flex;
-      gap: 15px;
-      margin-top: 15px;
-    }
-    
-    .social-links a {
-      width: 40px;
-      height: 40px;
-      background: rgba(126, 179, 196, 0.1);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.3s;
-      box-shadow: 0 5px 15px rgba(126, 179, 196, 0.1);
-    }
-    
-    .social-links a:hover {
-      background: #7eb3c4;
-      color: #0a1929;
-      transform: translateY(-5px) scale(1.1);
-      box-shadow: 0 10px 25px rgba(126, 179, 196, 0.4);
-    }
-    
-    @media (max-width: 768px) {
-      .hero h1 {
-        font-size: 3rem;
-      }
-      
-      .hero p {
-        font-size: 1.1rem;
-      }
-      
-      nav {
-        padding: 15px 20px;
-      }
-      
-      .nav-links {
-        gap: 15px;
-        font-size: 0.9rem;
-      }
-      
-      .features, .showcase, .how, .about {
-        padding: 80px 20px;
-      }
-      
-      .showcase-box {
-        width: 90%;
-        height: 480px;
-      }
-      
-      .footer-content {
-        grid-template-columns: 1fr;
-        gap: 30px;
-      }
-      
-      .hero h1 {
-        font-size: 2rem;
-      }
-      
-      .showcase h2, .how h2, .about h2 {
-        font-size: 2rem;
-      }
-    }
-  </style>
+  <title>T2B&nbsp;-&nbsp;Home</title>
+  <link rel="icon" href="images/website_logo.png" type="images/png"/>
+  <link rel="stylesheet" href="home_page.css">
 </head>
 <body>
-  <!-- Navigation -->
   <nav>
     <div class="logo">TAP TO BUILD</div>
     <div class="nav-links">
-      <a href="login.html">Home</a>
+      <a href="#1">Home</a>
       <a href="#features">Features</a>
       <a href="#how">How it Works</a>
       <a href="#about">About</a>
-      <a href="sign_up.html" class="nav-account">Account</a>
+        <a href="admin_login.html">Admin</a>
+      <a href="login.html" class="nav-account" id="nav-account-btn">Account</a>
+      <a href="profile.html" class="nav-profile" id="nav-profile-icon" style="display: none; flex-shrink: 0;">
+        <img id="nav-profile-image" style="display: none; width: 100%; height: 100%; object-fit: cover; border-radius: 50%; margin: 0; padding: 0; border: none;">
+        <svg id="nav-profile-svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+          <circle cx="12" cy="7" r="4"></circle>
+        </svg>
+      </a>
     </div>
   </nav>
 
+  <div id="auth-toast" class="auth-toast" role="status" aria-live="polite">
+    <div class="auth-toast__icon">T</div>
+    <div class="auth-toast__copy">
+      <p class="auth-toast__eyebrow">Tap to Build says</p>
+      <p class="auth-toast__title">Please log in first</p>
+      <p class="auth-toast__body">Sign in to keep your progress and start building.</p>
+      <div class="auth-toast__actions">
+        <a class="auth-toast__cta" href="login.html">Login</a>
+      </div>
+    </div>
+    <button class="auth-toast__close" aria-label="Dismiss message">×</button>
+  </div>
+
   <!-- Hero Section -->
-  <div class="hero">
+  <div class="hero" id="1">
     <div class="grid-background"></div>
     <div class="hero-content">
       <h1>Build apps. Your way. Instantly.</h1>
@@ -769,25 +56,25 @@
   <section class="features" id="features">
     <div class="features-grid">
       <div class="feature-card">
-        <span class="feature-icon">⚡</span>
-        <h3>Create Without Code</h3>
-        <p>Draw, customize, and design your app in a visual interface. No programming knowledge required.</p>
+        <img src="images/code.png" alt="Learn Without Code" class="feature-icon">
+        <h3>Learn Without Code</h3>
+        <p>Master app-building concepts through intuitive visuals instead of complex programming. Tap, drag, and build while understanding the fundamentals step by step—no prior knowledge required.</p>
       </div>
       <div class="feature-card">
-        <span class="feature-icon">🎨</span>
-        <h3>Smart Templates</h3>
-        <p>Pick themes and layouts engineered for speed and simplicity. Get started in seconds.</p>
+        <img src="images/paint.png" alt="Customize Your Design" class="feature-icon">
+        <h3>Customize Your Design</h3>
+        <p>Choose from clean layouts, color palettes, and UI components. Personalize every screen to reflect your brand and create a unique experience your users will love.</p>
       </div>
       <div class="feature-card">
-        <span class="feature-icon">🚀</span>
-        <h3>Publish Anywhere</h3>
-        <p>Generate usable apps ready to deploy and share instantly across any platform.</p>
+        <img src="images/eval.png" alt="Evaluate Your Work" class="feature-icon">
+        <h3>Evaluate Your Work</h3>
+        <p>Preview your app in real-time, test features instantly, and refine your design before publishing. See exactly how your app performs at every stage.</p>
       </div>
     </div>
   </section>
 
   <!-- Showcase -->
-  <section class="showcase">
+  <section class="showcase" >
     <h2>Your App. Your Vision.</h2>
     <p>Preview what your generated app might look like</p>
     <div class="showcase-container">
@@ -798,47 +85,94 @@
           <div class="dot"></div>
         </div>
         <div style="padding:0 5px; display:flex; align-items:center; justify-content:center;">
-          <img src="images/im.jpeg" alt="App preview" class="preview-image">
+          <img src="images/app_screen.png" alt="App preview" class="preview-image">
         </div>
       </div>
     </div>
   </section>
 
   <!-- How It Works -->
-  <section class="how" id="how">
-    <h2>How It Works</h2>
-    <div class="steps">
-      <div class="step">
-        <div class="step-number">1</div>
-        <div class="step-content">Choose your theme</div>
-      </div>
-      <div class="step">
-        <div class="step-number">2</div>
-        <div class="step-content">Design your layout</div>
-      </div>
-      <div class="step">
-        <div class="step-number">3</div>
-        <div class="step-content">Generate instantly</div>
-      </div>
-      <div class="step">
-        <div class="step-number">4</div>
-        <div class="step-content">Use or publish</div>
-      </div>
-    </div>
-  </section>
+   <section class="howitworks" id="how">
+  <h2>How It Works</h2>
+  <p class="subtitle">Build your app in four simple steps.</p>
 
-  <!-- About Section -->
-  <section class="about" id="about">
-    <div class="about-content">
-      <h2>About Tap to Build</h2>
-      <p>Tap to Build is revolutionizing the way people create applications. Our mission is to empower everyone, regardless of technical background, to bring their ideas to life through intuitive, AI-powered app generation.</p>
-      <p>Founded in 2025, we believe that creativity shouldn't be limited by coding skills. With our platform, designers, entrepreneurs, and innovators can focus on what matters most: their vision.</p>
-    </div>
-  </section>
+  <div class="how-grid">
 
+    <div class="how-card">
+      <div class="icon-wrap">1</div>
+      <h3>Enter Your Info</h3>
+      <p>Start by adding your website name, description, and purpose.</p>
+    </div>
+
+    <div class="how-card">
+      <div class="icon-wrap">2</div>
+      <h3>Choose Color & Logo</h3>
+      <p>Select your brand palette and upload your logo.</p>
+    </div>
+
+    <div class="how-card">
+      <div class="icon-wrap">3</div>
+      <h3>Configure Features</h3>
+      <p>Pick pages, structure, and customize your layout.</p>
+    </div>
+
+    <div class="how-card">
+      <div class="icon-wrap">4</div>
+      <h3>Evaluate Your Work</h3>
+      <p>Preview instantly and adjust before generating.</p>
+    </div>
+
+  </div>
+</section>
   <!-- Footer -->
-  <footer>
+  <footer id="about">
     <div class="footer-content">
+      <div class="footer-section footer-brand">
+        <div class="footer-logo-container">
+          <!-- <img src="images/website_logo.png" alt="Tap to Build" class="footer-logo-img"> -->
+          <span class="footer-logo-text">TAP TO BUILD</span>
+        </div>
+        <p class="footer-tagline">Empowering everyone to build beautiful apps without code. Turn your ideas into reality in minutes.</p>
+        <div class="social-links">
+          <a href="https://github.com/Narjes-almasri/frontend" aria-label="Twitter"><svg xmlns="http://www.w3.org/2000/svg"
+     width="24"
+     height="24"
+     viewBox="0 0 24 24"
+     fill="#000000"
+     aria-label="GitHub">
+          <path   d="M12 0.297c-6.63 0-12 5.373-12 12 0 5.303 
+          3.438 9.8 8.205 11.385 0.6 0.113 0.82-0.258 
+          0.82-0.577 0-0.285-0.01-1.04-0.015-2.04
+          -3.338 0.724-4.042-1.61-4.042-1.61
+          -0.546-1.387-1.333-1.757-1.333-1.757
+          -1.089-0.745 0.083-0.729 0.083-0.729
+          1.205 0.085 1.84 1.236 1.84 1.236
+          1.07 1.835 2.809 1.305 3.495 0.998
+          0.108-0.776 0.418-1.305 0.762-1.605
+          -2.665-0.305-5.467-1.334-5.467-5.93
+          0-1.31 0.468-2.381 1.235-3.221
+          -0.135-0.303-0.54-1.523 0.117-3.176
+          0 0 1.008-0.322 3.301 1.23
+          0.957-0.266 1.983-0.399 3.003-0.404
+          1.02 0.005 2.047 0.138 3.006 0.404
+          2.291-1.552 3.297-1.23 3.297-1.23
+          0.659 1.653 0.254 2.873 0.119 3.176
+          0.77 0.84 1.234 1.911 1.234 3.221
+          0 4.609-2.807 5.624-5.479 5.921
+          0.43 0.371 0.823 1.102 0.823 2.222
+          0 1.606-0.014 2.898-0.014 3.293
+          0 0.319 0.216 0.694 0.825 0.576
+          C20.565 22.092 24 17.592 24 12.297
+          c0-6.627-5.373-12-12-12z"/>
+    </svg>
+    </a>
+          <a href="https://github.com/Narjes-almasri/GP" aria-label="LinkedIn">in</a>
+          <a href="https://apps.apple.com/jo/app/night-sky/id475772902" aria-label="Launch App" class="social-app-link">
+            <img src="images/website_logo.png" alt="Launch App" class="social-logo">
+          </a>
+        </div>
+      </div>
+
       <div class="footer-section">
         <h3>Product</h3>
         <ul>
@@ -846,16 +180,6 @@
           <li><a href="discover.html">Discover Apps</a></li>
           <li><a href="pricing.html">Pricing</a></li>
           <li><a href="templates.html">Templates</a></li>
-        </ul>
-      </div>
-      
-      <div class="footer-section">
-        <h3>Resources</h3>
-        <ul>
-          <li><a href="blog.html">Blog</a></li>
-          <li><a href="documentation.html">Documentation</a></li>
-          <li><a href="tutorials.html">Tutorials</a></li>
-          <li><a href="support.html">Support</a></li>
         </ul>
       </div>
       
@@ -872,28 +196,155 @@
       <div class="footer-section">
         <h3>Legal</h3>
         <ul>
-          <li><a href="terms.html">Terms & Conditions</a></li>
+          <li><a href="terms.html">Terms of Service</a></li>
           <li><a href="privacy.html">Privacy Policy</a></li>
           <li><a href="cookies.html">Cookie Policy</a></li>
         </ul>
       </div>
-      
-      <div class="footer-section">
-        <h3>Contact</h3>
-        <p>Email: hello@taptobuild.com</p>
-        <p>Phone: +1 (555) 123-4567</p>
-        <p>Address: 123 Innovation St, Tech City, TC 12345</p>
-        <div class="social-links">
-          <a href="#" aria-label="Twitter">𝕏</a>
-          <a href="#" aria-label="LinkedIn">in</a>
-          <a href="#" aria-label="GitHub">⚙</a>
-        </div>
-      </div>
     </div>
     
     <div class="footer-bottom">
-      <p>© 2025 Tap to Build — All rights reserved.</p>
+      <div class="footer-copyright">© 2025 Tap to Build.</div>
+      <div class="footer-copyright">Made with ❤️ in Jordan</div>
     </div>
   </footer>
 </body>
 </html>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const cards = document.querySelectorAll(".how-card");
+  const icons = document.querySelectorAll(".icon-wrap");
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add("animate");
+    });
+  }, { threshold: 0.2 });
+
+  cards.forEach(el => observer.observe(el));
+  icons.forEach(el => observer.observe(el));
+
+  /* ---------------------------------------------
+     HOVER ANIMATION — REPLAY THE SAME EFFECT EXACTLY
+  --------------------------------------------- */
+  cards.forEach(card => {
+    card.addEventListener("mouseenter", () => {
+      // remove previous animation
+      card.classList.remove("hover-replay", "animate");
+
+      // force browser to reset animation
+      void card.offsetWidth;
+
+      // apply replay animation
+      card.classList.add("hover-replay");
+    });
+
+    card.addEventListener("mouseleave", () => {
+      // remove strong hover styles smoothly
+      card.style.transition = "transform 0.3s, box-shadow 0.3s";
+      card.style.transform = "translateY(0) scale(1)";
+      card.style.boxShadow = "none";
+
+      setTimeout(() => {
+        card.style.transition = "";
+      }, 300);
+    });
+  });
+  
+});
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const step1 = document.querySelector(".how-card:nth-child(1)");
+  const icon1 = step1.querySelector(".icon-wrap");
+
+  step1.addEventListener("mouseenter", () => {
+    icon1.style.opacity = "1";
+    icon1.style.transform = "scale(1)";
+    icon1.style.animation = "stepNumberPop 0.7s ease-out forwards";
+  });
+
+  step1.addEventListener("mouseleave", () => {
+    icon1.style.opacity = "0";
+    icon1.style.transform = "scale(0.4)";
+    icon1.style.animation = "none";
+  });
+});
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const cards = document.querySelectorAll(".how-card");
+
+  cards.forEach(card => {
+    const icon = card.querySelector(".icon-wrap");
+
+    card.addEventListener("mouseenter", () => {
+      icon.style.opacity = "1";
+      icon.style.transform = "scale(1)";
+      icon.style.animation = "stepNumberPop 0.7s ease-out forwards";
+    });
+
+    card.addEventListener("mouseleave", () => {
+      icon.style.opacity = "0";
+      icon.style.transform = "scale(0.4)";
+      icon.style.animation = "none";
+    });
+  });
+});
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const startButton = document.querySelector(".btn-primary[href='profile_setup.html']");
+  const toast = document.getElementById("auth-toast");
+  const closeToastBtn = toast ? toast.querySelector(".auth-toast__close") : null;
+  let toastTimer;
+  if (!startButton) return;
+
+  const hideToast = () => {
+    if (!toast) return;
+    toast.classList.remove("show");
+    if (toastTimer) clearTimeout(toastTimer);
+  };
+
+  const showToast = () => {
+    if (!toast) return;
+    toast.classList.add("show");
+    if (toastTimer) clearTimeout(toastTimer);
+    toastTimer = setTimeout(hideToast, 3200);
+  };
+
+  if (closeToastBtn) closeToastBtn.addEventListener("click", hideToast);
+
+  startButton.addEventListener("click", (event) => {
+    const isLoggedIn = sessionStorage.getItem("loggedIn") === "true";
+    if (!isLoggedIn) {
+      event.preventDefault();
+      showToast();
+    }
+  });
+});
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const isLoggedIn = sessionStorage.getItem("loggedIn") === "true";
+  const accountBtn = document.getElementById("nav-account-btn");
+  const profileIcon = document.getElementById("nav-profile-icon");
+  const profileImage = document.getElementById("nav-profile-image");
+  const profileSvg = document.getElementById("nav-profile-svg");
+
+  if (isLoggedIn && accountBtn && profileIcon) {
+    accountBtn.style.display = "none";
+    profileIcon.style.display = "flex";
+    
+    // Check if user has uploaded a profile image
+    const uploadedImage = sessionStorage.getItem("profileImage");
+    if (uploadedImage) {
+      profileImage.src = uploadedImage;
+      profileImage.style.display = "block";
+      profileSvg.style.display = "none";
+    } else {
+      profileImage.style.display = "none";
+      profileSvg.style.display = "block";
+    }
+  }
+});
+</script>

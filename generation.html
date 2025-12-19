@@ -4,20 +4,47 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Generator — Build</title>
-  <style>
-    body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;background:linear-gradient(135deg,#7eb3c4 0%,#9cc9d4 100%);color:#1a1a1a;display:flex;align-items:center;justify-content:center;height:100vh}
-    .box{background:rgba(255,255,255,0.15);backdrop-filter:blur(10px);padding:36px;border-radius:20px;max-width:920px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,0.15)}
-    h1{margin:0 0 12px;font-size:28px;color:#1a1a1a}
-    p{color:#333}
-    .btn-primary{margin-top:20px;padding:12px 18px;border-radius:10px;background:#000;color:#fff;text-decoration:none;font-weight:700;border:none;display:inline-flex;align-items:center;gap:8px}
-    .btn-primary:hover{background:#222}
-  </style>
+  <link rel="icon" href="images/website_logo.png" type="image/png"/>
+  <link rel="stylesheet" href="generation.css">
   <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 </head>
 <body>
   <div class="box">
     <h1 id="headerTitle">App Generation — Painter</h1>
     <p id="headerDesc">Use the tools to add shapes, pick colors, edit text, and compose on the whiteboard.</p>
+
+    <!-- Sample Designs Section -->
+    <div style="background:rgba(255,255,255,0.05);padding:20px;border-radius:12px;margin-top:20px;margin-bottom:20px;border:2px dashed rgba(255,255,255,0.2)">
+      <div style="text-align:center;margin-bottom:16px">
+        <strong style="color:#fff;font-size:16px">💡 Sample Designs</strong>
+        <p style="color:rgba(255,255,255,0.7);font-size:13px;margin-top:8px">A sample design is provided to guide you. Use it as inspiration to create your own version.</p>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:12px;max-width:700px;margin:0 auto">
+        <div style="background:rgba(255,255,255,0.9);padding:12px;border-radius:8px;text-align:center">
+          <img src="images/logo_designs/gb.png" alt="Sample logo 1" style="width:100%;height:80px;object-fit:contain">
+        </div>
+        <div style="background:rgba(255,255,255,0.9);padding:12px;border-radius:8px;text-align:center">
+          <img src="images/logo_designs/hp.png" alt="Sample logo 2" style="width:100%;height:80px;object-fit:contain">
+        </div>
+        <div style="background:rgba(255,255,255,0.9);padding:12px;border-radius:8px;text-align:center">
+          <img src="images/logo_designs/lv.png" alt="Sample logo 3" style="width:100%;height:80px;object-fit:contain">
+        </div>
+        <div style="background:rgba(255,255,255,0.9);padding:12px;border-radius:8px;text-align:center">
+          <img src="images/logo_designs/me.png" alt="Sample logo 4" style="width:100%;height:80px;object-fit:contain">
+        </div>
+        <div style="background:rgba(255,255,255,0.9);padding:12px;border-radius:8px;text-align:center">
+          <img src="images/logo_designs/one.png" alt="Sample logo 5" style="width:100%;height:80px;object-fit:contain">
+        </div>
+        <div style="background:rgba(255,255,255,0.9);padding:12px;border-radius:8px;text-align:center">
+          <img src="images/logo_designs/ysl.png" alt="Sample logo 6" style="width:100%;height:80px;object-fit:contain">
+        </div>
+      </div>
+      <div style="text-align:center;margin-top:12px">
+        <a href="https://www.pinterest.com/search/pins/?q=logo%20design%20inspiration" target="_blank" style="color:rgba(31, 27, 27, 0.6);font-size:12px;text-decoration:none;transition:color 0.2s">
+          View more logo ideas →
+        </a>
+      </div>
+    </div>
 
     <div style="display:flex;gap:18px;margin-top:18px;align-items:flex-start">
       <!-- Tools column -->
@@ -111,50 +138,22 @@
         <div style="margin-top:10px;display:flex;gap:12px">
           <button id="clearBtn" class="btn-primary">Clear</button>
           <button id="saveLogoBtn" class="btn-primary">Save logo</button>
-          <a class="btn-primary" href="post_login.html">Back</a>
+          <a class="btn-primary" href="app_setup.html">Back</a>
         </div>
       </div>
     </div>
 
-    <style>
-      .tool{background:transparent;border:1px solid rgba(0,0,0,0.06);padding:8px 10px;border-radius:8px;color:#1a1a1a;font-weight:700;cursor:pointer;transition:all 0.15s}
-      .tool:hover{transform:translateY(-2px)}
-      .palette-swatch{width:34px;height:34px;border-radius:6px;border:2px solid rgba(0,0,0,0.06);cursor:pointer;transition:transform 0.1s}
-      .palette-swatch:hover{transform:scale(1.1)}
-      .resize-handle{position:absolute;width:12px;height:12px;background:#fff;border-radius:2px;right:-6px;bottom:-6px;cursor:se-resize;box-shadow:0 2px 6px rgba(2,6,23,0.2);pointer-events:auto}
-      .shape{position:absolute;cursor:grab;display:flex;align-items:center;justify-content:center;z-index:1}
-      .shape.selected{outline:3px dashed rgba(124,77,255,0.7)}
-      .shape.dragging{cursor:grabbing;opacity:0.9}
-      .text-shape{padding:6px 10px;border-radius:6px;background:transparent;color:#1a1a1a;user-select:none}
-    </style>
-
     <script>
       (function(){
-        const appName = sessionStorage.getItem('appName');
-        const generatedLogo = sessionStorage.getItem('generatedLogo');
-        const uploadedLogo = generatedLogo || sessionStorage.getItem('uploadedLogo');
-        
-        if (appName) {
-          document.getElementById('headerTitle').textContent = `Generate your own ${appName} logo`;
-          document.getElementById('headerDesc').textContent = `Design a unique logo for ${appName} using our painter tools. Add shapes, colors, and text.`;
+        let appName = 'Your Brand';
+        const userProfile = sessionStorage.getItem('userProfile');
+        if (userProfile) {
+          const profile = JSON.parse(userProfile);
+          appName = profile.websiteName || 'Your Brand';
         }
         
-        if (uploadedLogo) {
-          const whiteboard = document.getElementById('whiteboard');
-          const img = document.createElement('img');
-          img.src = uploadedLogo;
-          img.style.position = 'absolute';
-          img.style.left = '50%';
-          img.style.top = '50%';
-          img.style.transform = 'translate(-50%, -50%)';
-          img.style.maxWidth = '300px';
-          img.style.maxHeight = '300px';
-          img.style.borderRadius = '8px';
-          img.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
-          img.className = 'shape';
-          img.dataset.type = 'image';
-          whiteboard.appendChild(img);
-        }
+        document.getElementById('headerTitle').innerHTML = `Generate your own <span style="background:linear-gradient(135deg,#154552,#357a8e);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-weight:900">${appName}</span> logo`;
+        document.getElementById('headerDesc').textContent = `Design a unique logo for ${appName} using our painter tools. Add shapes, colors, and text.`;
       })();
 
       (function(){
@@ -226,10 +225,34 @@
           palette.appendChild(sw);
         });
 
-        if(fillToggle) fillToggle.addEventListener('change', (e) => { fillMode = e.target.checked; const target = hoverEl || selectedEl; if(target && target.dataset.type !== 'text') target.dataset.fillMode = fillMode; });
-        if(strokeColorPicker) strokeColorPicker.addEventListener('input', (e) => { currentStrokeColor = e.target.value; const target = hoverEl || selectedEl; if(target && target.dataset.type !== 'text') target.dataset.needsRedraw = true; });
-        if(strokeWidth) strokeWidth.addEventListener('input', (e) => { currentStrokeWidth = parseInt(e.target.value); const target = hoverEl || selectedEl; if(target && target.dataset.type !== 'text') target.dataset.needsRedraw = true; });
-        if(strokeStyle) strokeStyle.addEventListener('change', (e) => { currentStrokeStyle = e.target.value; const target = hoverEl || selectedEl; if(target && target.dataset.type !== 'text') target.dataset.needsRedraw = true; });
+        if(fillToggle) fillToggle.addEventListener('change', (e) => { 
+          fillMode = e.target.checked;
+          const target = selectedEl;
+          if(target && target.dataset.type !== 'text') {
+            updateShapeAppearance(target);
+          }
+        });
+        if(strokeColorPicker) strokeColorPicker.addEventListener('input', (e) => { 
+          currentStrokeColor = e.target.value;
+          const target = selectedEl;
+          if(target && target.dataset.type !== 'text') {
+            updateShapeAppearance(target);
+          }
+        });
+        if(strokeWidth) strokeWidth.addEventListener('input', (e) => { 
+          currentStrokeWidth = parseInt(e.target.value);
+          const target = selectedEl;
+          if(target && target.dataset.type !== 'text') {
+            updateShapeAppearance(target);
+          }
+        });
+        if(strokeStyle) strokeStyle.addEventListener('change', (e) => { 
+          currentStrokeStyle = e.target.value;
+          const target = selectedEl;
+          if(target && target.dataset.type !== 'text') {
+            updateShapeAppearance(target);
+          }
+        });
         if(fontFamily) fontFamily.addEventListener('change', (e) => { 
           currentFontFamily = e.target.value;
           if(editingEl && editingEl.dataset.type === 'text') { 
@@ -251,17 +274,116 @@
 
         if(saveLogoBtn) saveLogoBtn.addEventListener('click', async () => {
           const wb = document.getElementById('whiteboard');
-          const canvas = await html2canvas(wb, {backgroundColor: null, scale: 2});
+          const shapes = wb.querySelectorAll('.shape');
+          
+          if (shapes.length === 0) {
+            alert('Please create a logo first! Use the tools to add shapes, text, or colors.');
+            return;
+          }
+          
+          // Compute tight bounding box of shapes using their CSS positions
+          let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+          shapes.forEach(shape => {
+            const left = parseFloat(shape.style.left) || 0;
+            const top = parseFloat(shape.style.top) || 0;
+            const w = shape.offsetWidth;
+            const h = shape.offsetHeight;
+            minX = Math.min(minX, left);
+            minY = Math.min(minY, top);
+            maxX = Math.max(maxX, left + w);
+            maxY = Math.max(maxY, top + h);
+          });
+          if (!isFinite(minX) || !isFinite(minY) || !isFinite(maxX) || !isFinite(maxY)) {
+            alert('Could not determine logo bounds. Try moving a shape slightly and save again.');
+            return;
+          }
+          const padding = 20;
+          minX = Math.max(0, minX - padding);
+          minY = Math.max(0, minY - padding);
+          maxX = Math.min(wb.clientWidth, maxX + padding);
+          maxY = Math.min(wb.clientHeight, maxY + padding);
+          const tightW = Math.max(1, Math.floor(maxX - minX));
+          const tightH = Math.max(1, Math.floor(maxY - minY));
+          
+          // Build a temporary offscreen container with cloned shapes normalized to (0,0)
+          const temp = document.createElement('div');
+          temp.style.position = 'fixed';
+          temp.style.left = '-10000px';
+          temp.style.top = '0';
+          temp.style.width = tightW + 'px';
+          temp.style.height = tightH + 'px';
+          temp.style.background = 'transparent';
+          temp.style.zIndex = '-1';
+          temp.style.pointerEvents = 'none';
+          temp.style.borderRadius = '0';
+          temp.style.overflow = 'visible';
+          document.body.appendChild(temp);
+          
+          // Clone shapes into temp, adjust left/top relative to minX/minY
+          shapes.forEach(shape => {
+            const clone = shape.cloneNode(true);
+            const left = parseFloat(shape.style.left) || 0;
+            const top = parseFloat(shape.style.top) || 0;
+            clone.style.left = (left - minX) + 'px';
+            clone.style.top = (top - minY) + 'px';
+            clone.style.position = 'absolute';
+            // Normalize z-index stacking
+            clone.style.zIndex = '1';
+            temp.appendChild(clone);
+          });
+          
+          // Render the temp container
+          const canvas = await html2canvas(temp, {backgroundColor: null, scale: 2});
+          // Cleanup
+          document.body.removeChild(temp);
+          
           const dataUrl = canvas.toDataURL('image/png');
           sessionStorage.setItem('generatedLogo', dataUrl);
-          sessionStorage.setItem('uploadedLogo', dataUrl);
+          sessionStorage.removeItem('uploadedLogo');
           alert('Logo saved! It will be used in your generated website.');
-          window.location.href = 'product_page_selection.html';
+          window.location.href = 'build_preview.html';
         });
 
         document.addEventListener('keydown', (e) => {
           if((e.key === 'Delete' || e.key === 'Backspace') && selectedEl){ selectedEl.remove(); selectedEl = null; textControls.style.display='none'; }
         });
+
+        function updateShapeAppearance(el) {
+          if (!el || el.dataset.type === 'text') return;
+          
+          const type = el.dataset.type;
+          const color = el.dataset.color || currentColor;
+          
+          if (type === 'rect' || type === 'rounded' || type === 'circle' || type === 'ellipse') {
+            if (fillMode) {
+              el.style.background = color;
+              el.style.border = `${currentStrokeWidth}px ${currentStrokeStyle} ${currentStrokeColor}`;
+            } else {
+              el.style.background = 'transparent';
+              el.style.border = `${currentStrokeWidth}px ${currentStrokeStyle} ${currentStrokeColor}`;
+            }
+          } else if (type === 'triangle' || type === 'star') {
+            const shape = el.querySelector('polygon, path');
+            if (shape) {
+              if (fillMode) {
+                shape.setAttribute('fill', color);
+                shape.setAttribute('stroke', 'none');
+              } else {
+                shape.setAttribute('fill', 'none');
+                shape.setAttribute('stroke', currentStrokeColor);
+                shape.setAttribute('stroke-width', currentStrokeWidth);
+                shape.setAttribute('stroke-dasharray', currentStrokeStyle === 'dashed' ? '8 6' : (currentStrokeStyle === 'dotted' ? '2 4' : '0'));
+              }
+            }
+          } else if (type === 'line') {
+            const line = el.querySelector('line');
+            if (line) {
+              line.setAttribute('stroke', currentStrokeColor);
+              line.setAttribute('stroke-width', currentStrokeWidth);
+              line.setAttribute('stroke-dasharray', currentStrokeStyle === 'dashed' ? '8 6' : (currentStrokeStyle === 'dotted' ? '2 4' : '0'));
+            }
+          }
+        }
 
         shapesEl.addEventListener('click', (ev) => {
           const btn = ev.target.closest('button[data-shape]');

@@ -3,100 +3,677 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>App builder for generate apps</title>
-    <link rel="stylesheet" href="f.css">
+    <title>Login - Tap to Build</title>
+    <link rel="icon" href="images/website_logo.png" type="images/png"/>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            /* background: linear-gradient(135deg, #7eb3c4 0%, #9cc9d4 100%); */
+            background: linear-gradient(0deg, #2A7777 0%, #90B8C1 50%, #AEC7CB 99.04%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            max-width: 1000px;
+            width: 100%;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 50px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .login-card {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .header {
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            color: #1a202c;
+            margin-bottom: 10px;
+        }
+
+        .header .subtitle {
+            color: #718096;
+            font-size: 14px;
+        }
+
+        .header .subtitle a {
+            color: #7eb3c4;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .header .subtitle a:hover {
+            text-decoration: underline;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            color: #4a5568;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #a0aec0;
+            font-size: 18px;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px 16px 14px 45px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #7eb3c4;
+            box-shadow: 0 0 0 3px rgba(126, 179, 196, 0.1);
+        }
+
+        input::placeholder {
+            color: #cbd5e0;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #a0aec0;
+            cursor: pointer;
+            font-size: 18px;
+            padding: 5px;
+            transition: color 0.3s ease;
+        }
+
+        .password-toggle:hover {
+            color: #7eb3c4;
+        }
+
+        .forgot-password {
+            text-align: right;
+            margin-top: -12px;
+            margin-bottom: 24px;
+        }
+
+        .forgot-password a {
+            color: #7eb3c4;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .forgot-password a:hover {
+            text-decoration: underline;
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #7eb3c4 0%, #9cc9d4 100%);
+            color: #0a1929;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(126, 179, 196, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(126, 179, 196, 0.6);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 30px 0;
+            color: #a0aec0;
+            font-size: 13px;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #e2e8f0;
+        }
+
+        .divider span {
+            padding: 0 15px;
+        }
+
+        .social-login {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .btn-social {
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-social:hover {
+            border-color: #7eb3c4;
+            background: #f7fafc;
+        }
+
+        .promo-card {
+            background: linear-gradient(135deg, #7eb3c4 0%, #9cc9d4 100%);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .promo-card::before {
+            content: '';
+            position: absolute;
+            width: 300%;
+            height: 300%;
+            background: radial-gradient(circle at center, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.05) 40%, transparent 70%);
+            animation: pulse 6s ease-in-out infinite;
+        }
+
+        .promo-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 50%, rgba(255,255,255,0.05) 100%);
+            pointer-events: none;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.6; }
+            50% { transform: scale(1.2) rotate(180deg); opacity: 1; }
+        }
+
+        .promo-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .promo-title {
+            font-size: 56px;
+            font-weight: 900;
+            margin-bottom: 15px;
+            letter-spacing: 2px;
+            /* text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), 0 0 40px rgba(255, 255, 255, 0.2); */
+            background: linear-gradient(to bottom, #ffffff 0%, rgba(255,255,255,0.9) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.25));
+        }
+
+        .promo-subtitle {
+            font-size: 22px;
+            font-weight: 300;
+            margin-bottom: 45px;
+            opacity: 0.95;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            letter-spacing: 0.5px;
+        }
+
+        .cube-container {
+            perspective: 1000px;
+            margin: 45px 0 35px 45px;
+        }
+
+        .cube {
+            width: 150px;
+            height: 150px;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: rotate3d 8s infinite linear;
+        }
+
+        @keyframes rotate3d {
+            from { transform: rotateX(0deg) rotateY(0deg); }
+            to { transform: rotateX(360deg) rotateY(360deg); }
+        }
+
+        .cube-face {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(10px);
+        }
+
+        .cube-face:nth-child(1) { transform: rotateY(0deg) translateZ(75px); }
+        .cube-face:nth-child(2) { transform: rotateY(90deg) translateZ(75px); }
+        .cube-face:nth-child(3) { transform: rotateY(180deg) translateZ(75px); }
+        .cube-face:nth-child(4) { transform: rotateY(-90deg) translateZ(75px); }
+        .cube-face:nth-child(5) { transform: rotateX(90deg) translateZ(75px); }
+        .cube-face:nth-child(6) { transform: rotateX(-90deg) translateZ(75px); }
+
+        .features {
+            list-style: none;
+            text-align: left;
+        }
+
+        .features li {
+            padding: 14px 0;
+            font-size: 17px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-weight: 500;
+            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .features li:hover {
+            transform: translateX(5px);
+        }
+
+        .features li::before {
+            content: '✓';
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            background: rgba(255, 255, 255, 0.25);
+            border-radius: 50%;
+            font-weight: bold;
+            font-size: 16px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-top: 40px;
+            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+        }
+
+        .badge:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background: white;
+            margin: 10% auto;
+            padding: 40px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            position: relative;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .modal-header {
+            margin-bottom: 30px;
+        }
+
+        .modal-header h2 {
+            font-size: 28px;
+            color: #1a202c;
+            margin-bottom: 10px;
+        }
+
+        .modal-header p {
+            color: #718096;
+            font-size: 14px;
+        }
+
+        .close-modal {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            color: #a0aec0;
+            cursor: pointer;
+            background: none;
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .close-modal:hover {
+            background: #f7fafc;
+            color: #1a202c;
+        }
+
+        .success-message {
+            background: linear-gradient(135deg, #7eb3c4 0%, #9cc9d4 100%);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            display: none;
+            align-items: center;
+            gap: 12px;
+            animation: slideIn 0.3s ease;
+        }
+
+        .success-message svg {
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+            
+            .card {
+                padding: 30px;
+            }
+            
+            .promo-card {
+                order: -1;
+                min-height: 300px;
+            }
+
+            .modal-content {
+                margin: 20% auto;
+                padding: 30px;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <!-- left section: login -->
-        <div class="login-section">
-            <div class="login-card">
-                <div class="login-header">
-                    <div class="login-title">log in</div>
-                    <a href="sign_up.html" class="sign-up-link">sign up</a>
-                </div>
-
-                <form id="loginForm">
-                    <div class="form-group">
-                        <label>
-                            <span class="icon">✉</span> <!-- mat3ob 3la ekhteyar al iconssss -->
-                            <input type="email" id="email" placeholder="e-mail address" required>
-                        </label>
-                    </div>
-
-                    <div class="form-group">
-                        <label>
-                            <span class="icon">🔒</span>
-                            <input type="password" id="password" placeholder="Password" required>
-                            <span class="eye-icon" onclick="togglePassword()">👁️</span>
-                        </label>
-                    </div>
-
-                    <div class="forgot-password">Forget Password?</div>
-                </form>
-
-                <div class="description-text">
-                    Lorem ipsum dolor sit amet consectetur. At orci feugiat turpis in erat vel. Sit odio cursus amet neque eget velit tellus elit.
-                </div>
-
-                <button class="arrow-btn" onclick="handleLogin()">→</button>
+        <div class="card login-card">
+            <div class="header">
+                <h1>Welcome Back</h1>
+                <p class="subtitle">Don't have an account? <a href="sign_up.html">Sign up</a></p>
             </div>
 
-            <div class="tagline">
-                Bring your ideas to life — build your app in seconds.
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <div class="input-wrapper">
+                        <span class="input-icon"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#666666"><path d="M480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480v58q0 59-40.5 100.5T740-280q-35 0-66-15t-52-43q-29 29-65.5 43.5T480-280q-83 0-141.5-58.5T280-480q0-83 58.5-141.5T480-680q83 0 141.5 58.5T680-480v58q0 26 17 44t43 18q26 0 43-18t17-44v-58q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93h200v80H480Zm0-280q50 0 85-35t35-85q0-50-35-85t-85-35q-50 0-85 35t-35 85q0 50 35 85t85 35Z"/></svg></span>
+                        <input type="email" id="email" placeholder="you@example.com" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="input-wrapper">
+                        <span class="input-icon"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#666666"><path d="M240-80q-33 0-56.5-23.5T160-160v-400q0-33 23.5-56.5T240-640h40v-80q0-83 58.5-141.5T480-920q83 0 141.5 58.5T680-720v80h40q33 0 56.5 23.5T800-560v400q0 33-23.5 56.5T720-80H240Zm0-80h480v-400H240v400Zm240-120q33 0 56.5-23.5T560-360q0-33-23.5-56.5T480-440q-33 0-56.5 23.5T400-360q0 33 23.5 56.5T480-280ZM360-640h240v-80q0-50-35-85t-85-35q-50 0-85 35t-35 85v80ZM240-160v-400 400Z"/></svg></span>
+                        <input type="password" id="password" placeholder="Enter your password" required>
+                        <button type="button" class="password-toggle" onclick="togglePassword()"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#666666"><path d="m644-428-58-58q9-47-27-88t-93-32l-58-58q17-8 34.5-12t37.5-4q75 0 127.5 52.5T660-500q0 20-4 37.5T644-428Zm128 126-58-56q38-29 67.5-63.5T832-500q-50-101-143.5-160.5T480-720q-29 0-57 4t-55 12l-62-62q41-17 84-25.5t90-8.5q151 0 269 83.5T920-500q-23 59-60.5 109.5T772-302Zm20 246L624-222q-35 11-70.5 16.5T480-200q-151 0-269-83.5T40-500q21-53 53-98.5t73-81.5L56-792l56-56 736 736-56 56ZM222-624q-29 26-53 57t-41 67q50 101 143.5 160.5T480-280q20 0 39-2.5t39-5.5l-36-38q-11 3-21 4.5t-21 1.5q-75 0-127.5-52.5T300-500q0-11 1.5-21t4.5-21l-84-82Zm319 93Zm-151 75Z"/></svg></button>
+                    </div>
+                </div>
+
+                <div class="forgot-password">
+                    <a href="#forgot" id="forgotPasswordLink">Forgot Password?</a>
+                </div>
+
+                <button type="submit" class="btn-primary">Log In</button>
+            </form>
+
+            <div class="divider"><span>or continue with</span></div>
+
+            <div class="social-login">
+                <button class="btn-social" id="googleLogin">
+                    <span>  <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
+       alt="Google logo" width="20px" height="20px" /></span> Google
+                </button>
+                <button class="btn-social" id="appleLogin">
+                    <span><img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg"
+       alt="Apple logo" width="20px" height="20px"></span> Apple 
+                </button>
             </div>
         </div>
 
-        <!-- right section: app builder and the stolen 3d cube -->
-        <div class="app-card">
-            <div class="app-card-header">
-                <div class="app-title">New</div>
-                <div class="app-subtitle">APP<br>BUILDER</div>
-            </div>
+        <div class="card promo-card">
+            <div class="promo-content">
+                <h2 class="promo-title">BUILD</h2>
+                <p class="promo-subtitle">Anything You Imagine</p>
 
-            <div class="cube-container">
-                <div class="cube">
-                    <div class="cube-face cube-face-1"></div>
-                    <div class="cube-face cube-face-2"></div>
-                    <div class="cube-face cube-face-3"></div>
-                    <div class="cube-face cube-face-4"></div>
-                    <div class="cube-face cube-face-5"></div>
-                    <div class="cube-face cube-face-6"></div>
+                <div class="cube-container">
+                    <div class="cube">
+                        <div class="cube-face"></div>
+                        <div class="cube-face"></div>
+                        <div class="cube-face"></div>
+                        <div class="cube-face"></div>
+                        <div class="cube-face"></div>
+                        <div class="cube-face"></div>
+                    </div>
                 </div>
-            </div>
 
-            <div class="app-description">
-                <h2>Create apps instantly.</h2>
-                <h2>No code needed.</h2>
-                <h2>Start building today!</h2>
-            </div>
+                <ul class="features">
+                    <li>Create apps instantly</li>
+                    <li>No code needed</li>
+                    <li>Start building today</li>
+                </ul>
 
-            <div class="card-footer">
-                <div class="credit">
-                    <span>🌍</span>
-                    <span>By T2B</span>
-                </div>
-                <button class="build-btn" onclick="handleBuild()">
-                    Build now
-                    <span>→</span>
-                </button>
+                <span class="badge">🌎 Powered by T2B</span>
             </div>
         </div>
     </div>
 
-    <script>
-        function togglePassword() {
-            const password = document.getElementById('password');
-            password.type = password.type === 'password' ? 'text' : 'password';
-        }
-
-        function handleLogin() {
-            window.location.href = 'profile_setup.html';
-        }
-
-        function handleBuild() {
-            alert('redirecting to app builder');
-        }
-    </script>
+    <!-- Forgot Password Modal -->
+    <div id="forgotPasswordModal" class="modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeForgotModal()">&times;</button>
+            <div class="modal-header">
+                <h2>Reset Password</h2>
+                <p>Enter your email and we'll send you a reset link</p>
+            </div>
+            <div id="successMessage" class="success-message">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="white"><path d="m424-296 282-282-56-56-226 226-114-114-56 56 170 170Zm56 216q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Z"/></svg>
+                <span>Password reset link sent to your email!</span>
+            </div>
+            <form id="forgotPasswordForm">
+                <div class="form-group">
+                    <label for="resetEmail">Email Address</label>
+                    <div class="input-wrapper">
+                        <span class="input-icon"><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#666666"><path d="M480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480v58q0 59-40.5 100.5T740-280q-35 0-66-15t-52-43q-29 29-65.5 43.5T480-280q-83 0-141.5-58.5T280-480q0-83 58.5-141.5T480-680q83 0 141.5 58.5T680-480v58q0 26 17 44t43 18q26 0 43-18t17-44v-58q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93h200v80H480Zm0-280q50 0 85-35t35-85q0-50-35-85t-85-35q-50 0-85 35t-35 85q0 50 35 85t85 35Z"/></svg></span>
+                        <input type="email" id="resetEmail" placeholder="you@example.com" required>
+                    </div>
+                </div>
+                <button type="submit" class="btn-primary">Send Reset Link</button>
+            </form>
+        </div>
+    </div>
 </body>
 </html>
+    <script>
+     const openEye = `
+<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#666666">
+  <path d="M480-320q75 0 127.5-52.5T660-500q0-75-52.5-127.5T480-680q-75 0-127.5 52.5T300-500q0 75 52.5 127.5T480-320Zm0-72q-45 0-76.5-31.5T372-500q0-45 31.5-76.5T480-608q45 0 76.5 31.5T588-500q0 45-31.5 76.5T480-392Zm0 192q-146 0-266-81.5T40-500q54-137 174-218.5T480-800q146 0 266 81.5T920-500q-54 137-174 218.5T480-200Z"/>
+</svg>
+`;
+
+const closeEye = `
+<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#666666">
+  <path d="m644-428-58-58q9-47-27-88t-93-32l-58-58q17-8 34.5-12t37.5-4q75 0 127.5 52.5T660-500q0 20-4 37.5T644-428Zm128 126-58-56q38-29 67.5-63.5T832-500q-50-101-143.5-160.5T480-720q-29 0-57 4t-55 12l-62-62q41-17 84-25.5t90-8.5q151 0 269 83.5T920-500q-23 59-60.5 109.5T772-302Zm20 246L624-222q-35 11-70.5 16.5T480-200q-151 0-269-83.5T40-500q21-53 53-98.5t73-81.5L56-792l56-56 736 736-56 56ZM222-624q-29 26-53 57t-41 67q50 101 143.5 160.5T480-280q20 0 39-2.5t39-5.5l-36-38q-11 3-21 4.5t-21 1.5q-75 0-127.5-52.5T300-500q0-11 1.5-21t4.5-21l-84-82Z"/>
+</svg>
+`;
+
+function togglePassword() {
+    const passwordInput = document.getElementById('password');
+    const toggleBtn = document.querySelector('.password-toggle');
+
+    if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        toggleBtn.innerHTML = openEye;
+    } else {
+        passwordInput.type = 'password';
+        toggleBtn.innerHTML = closeEye;
+    }
+}
+
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const btn = this.querySelector('.btn-primary');
+            const originalText = btn.textContent;
+            btn.textContent = 'Logging in...';
+            btn.disabled = true;
+            
+            setTimeout(() => {
+                sessionStorage.setItem('loggedIn', 'true');
+                sessionStorage.setItem('userEmail', email);
+                btn.textContent = originalText;
+                btn.disabled = false;
+                window.location.href = 'home_page.html';
+            }, 1500);
+        });
+
+        // Forgot Password Modal
+        document.getElementById('forgotPasswordLink').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('forgotPasswordModal').style.display = 'block';
+        });
+
+        function closeForgotModal() {
+            document.getElementById('forgotPasswordModal').style.display = 'none';
+            document.getElementById('successMessage').style.display = 'none';
+            document.getElementById('forgotPasswordForm').reset();
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('forgotPasswordModal');
+            if (event.target === modal) {
+                closeForgotModal();
+            }
+        }
+
+        document.getElementById('forgotPasswordForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('resetEmail').value;
+            const btn = this.querySelector('.btn-primary');
+            
+            btn.textContent = 'Sending...';
+            btn.disabled = true;
+            
+            // Simulate sending email (In production, you'd call your backend API here)
+            setTimeout(() => {
+                document.getElementById('successMessage').style.display = 'flex';
+                btn.textContent = 'Send Reset Link';
+                btn.disabled = false;
+                
+                // Auto close after 3 seconds
+                setTimeout(() => {
+                    closeForgotModal();
+                }, 3000);
+            }, 1500);
+        });
+</script>
