@@ -1,0 +1,17 @@
+1. login/sign up:
+ • if a user signs up and then goes to the login page they must enter the exact pass they created during sign up to log in successfully
+ • users can only log in with an email address that has already been registered in the system
+ • entering a random pass or unregistered email should fail and prevent login
+ • if users forget their password they can use the forgot password option to reset it
+ • users can also log in using their google or apple accounts
+ • if the user logs in and makes changes like adding a profile picture or changing their username etc.. and then logs out and back in all their data should remain saved and NOT return to its default state their changes should be saved
+ اشتغل بدون سب عاليوزر لو سمحت 
+
+
+
+
+2. in the build_preview.html page :
+ • when the user clicks on the Admin Evaluation button the request should be reflected on the admin_dashboard page (if it's hard it's ok to skip it)
+
+ ------ also when the user finishes their website i want the icon of the website to be added to their profile ----- (bardo if it's hard for u it's ok to skip it cuz it's just about details)
+ 
