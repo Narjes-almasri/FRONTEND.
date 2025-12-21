@@ -143,7 +143,50 @@
       </div>
     </div>
 
+    <!-- Notification Modal -->
+    <div id="notificationModal" class="notification-modal">
+      <div class="notification-content">
+        <div class="notification-icon" id="notifIcon">✓</div>
+        <div class="notification-title" id="notifTitle">Success!</div>
+        <div class="notification-message" id="notifMessage">Your changes have been saved.</div>
+        <button class="notification-btn" id="notifBtn">Continue</button>
+      </div>
+    </div>
+
     <script>
+      // Notification function
+      function showNotification(type, title, message, buttonText = 'OK', callback = null) {
+        const modal = document.getElementById('notificationModal');
+        const icon = document.getElementById('notifIcon');
+        const titleEl = document.getElementById('notifTitle');
+        const messageEl = document.getElementById('notifMessage');
+        const btn = document.getElementById('notifBtn');
+        
+        // Set icon based on type
+        icon.className = 'notification-icon ' + type;
+        if (type === 'success') icon.textContent = '✓';
+        else if (type === 'error') icon.textContent = '⚠️';
+        else if (type === 'warning') icon.textContent = '💡';
+        
+        titleEl.textContent = title;
+        messageEl.textContent = message;
+        btn.textContent = buttonText;
+        
+        modal.classList.add('active');
+        
+        btn.onclick = function() {
+          modal.classList.remove('active');
+          if (callback) callback();
+        };
+        
+        modal.onclick = function(e) {
+          if (e.target === modal) {
+            modal.classList.remove('active');
+            if (callback) callback();
+          }
+        };
+      }
+
       (function(){
         let appName = 'Your Brand';
         const userProfile = sessionStorage.getItem('userProfile');
@@ -277,7 +320,7 @@
           const shapes = wb.querySelectorAll('.shape');
           
           if (shapes.length === 0) {
-            alert('Please create a logo first! Use the tools to add shapes, text, or colors.');
+            showNotification('warning', 'No Logo Created', 'Please create a logo first! Use the tools to add shapes, text, or colors.');
             return;
           }
           
@@ -294,7 +337,7 @@
             maxY = Math.max(maxY, top + h);
           });
           if (!isFinite(minX) || !isFinite(minY) || !isFinite(maxX) || !isFinite(maxY)) {
-            alert('Could not determine logo bounds. Try moving a shape slightly and save again.');
+            showNotification('error', 'Logo Bounds Error', 'Could not determine logo bounds. Try moving a shape slightly and save again.');
             return;
           }
           const padding = 20;
@@ -340,8 +383,9 @@
           const dataUrl = canvas.toDataURL('image/png');
           sessionStorage.setItem('generatedLogo', dataUrl);
           sessionStorage.removeItem('uploadedLogo');
-          alert('Logo saved! It will be used in your generated website.');
-          window.location.href = 'build_preview.html';
+          showNotification('success', 'Logo Saved!', 'Your logo has been saved successfully and will be used in your generated website.', 'Continue', function() {
+            window.location.href = 'build_preview.html';
+          });
         });
 
         document.addEventListener('keydown', (e) => {

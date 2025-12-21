@@ -96,7 +96,7 @@
       justify-content: center;
       transition: all 0.3s;
       box-shadow: none;
-      overflow: hidden;
+      overflow: visible;
       padding: 0;
       margin: 0;
       border: none;
@@ -142,6 +142,29 @@
       margin: 0;
       padding: 0;
       border: none;
+    }
+
+    .nav-profile-badge {
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      width: 10px;
+      height: 10px;
+      background: #ff4444;
+      border: 2px solid rgba(10, 25, 41, 0.9);
+      border-radius: 50%;
+      display: none;
+      z-index: 10;
+      animation: pulse 2s infinite;
+    }
+
+    .nav-profile-badge.show {
+      display: block;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
     }
 
     /* Toast for login gating */

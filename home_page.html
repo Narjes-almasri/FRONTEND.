@@ -17,6 +17,7 @@
         <a href="admin_login.html">Admin</a>
       <a href="login.html" class="nav-account" id="nav-account-btn">Account</a>
       <a href="profile.html" class="nav-profile" id="nav-profile-icon" style="display: none; flex-shrink: 0;">
+        <span class="nav-profile-badge" id="nav-profile-badge"></span>
         <img id="nav-profile-image" style="display: none; width: 100%; height: 100%; object-fit: cover; border-radius: 50%; margin: 0; padding: 0; border: none;">
         <svg id="nav-profile-svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
@@ -43,7 +44,7 @@
   <div class="hero" id="1">
     <div class="grid-background"></div>
     <div class="hero-content">
-      <h1>Build apps. Your way. Instantly.</h1>
+      <h1>Build websites. Your way. Instantly.</h1>
       <p>No code needed — design, generate, and publish in seconds.</p>
       <div class="hero-buttons">
         <a href="profile_setup.html" class="btn-primary">Start Building →</a>
@@ -85,8 +86,8 @@
           <div class="dot"></div>
         </div>
         <div style="padding:0 5px; display:flex; align-items:center; justify-content:center;">
-          <img src="images/app_screen.png" alt="App preview" class="preview-image">
-        </div>
+          <video src="images/narone.mov" alt="App preview" class="preview-image" muted playsinline preload="metadata"></video>
+        </div> 
       </div>
     </div>
   </section>
@@ -214,6 +215,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   const cards = document.querySelectorAll(".how-card");
   const icons = document.querySelectorAll(".icon-wrap");
+  const previewVideo = document.querySelector(".preview-image");
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) entry.target.classList.add("animate");
@@ -222,6 +224,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
   cards.forEach(el => observer.observe(el));
   icons.forEach(el => observer.observe(el));
+
+  // Play/pause showcase video on hover
+  if (previewVideo) {
+    previewVideo.playbackRate = 1.25;
+    previewVideo.addEventListener("mouseenter", () => {
+      previewVideo.currentTime = 0;
+      const playPromise = previewVideo.play();
+      if (playPromise && typeof playPromise.catch === "function") {
+        playPromise.catch(() => {});
+      }
+    });
+    previewVideo.addEventListener("mouseleave", () => {
+      previewVideo.pause();
+    });
+  }
 
   /* ---------------------------------------------
      HOVER ANIMATION — REPLAY THE SAME EFFECT EXACTLY
@@ -330,6 +347,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const profileIcon = document.getElementById("nav-profile-icon");
   const profileImage = document.getElementById("nav-profile-image");
   const profileSvg = document.getElementById("nav-profile-svg");
+  const profileBadge = document.getElementById("nav-profile-badge");
 
   if (isLoggedIn && accountBtn && profileIcon) {
     accountBtn.style.display = "none";
@@ -344,6 +362,12 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
       profileImage.style.display = "none";
       profileSvg.style.display = "block";
+    }
+    
+    // Show notification badge if there's a pending admin evaluation
+    const hasEvaluation = sessionStorage.getItem("adminEvaluationRequested") === "true";
+    if (hasEvaluation && profileBadge) {
+      profileBadge.classList.add("show");
     }
   }
 });

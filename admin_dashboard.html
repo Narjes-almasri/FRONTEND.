@@ -125,7 +125,6 @@
   <script>
     function getTeamData(){
       const content = JSON.parse(sessionStorage.getItem('pageContent')||'{}');
-      const images = JSON.parse(sessionStorage.getItem('pageImages')||'{}');
       const names = [
         content.member1Name || 'Narjes Almasri',
         content.member2Name || 'Leen Almahthi',
@@ -135,16 +134,17 @@
       const roles = [
         content.member1Role || 'Founder & Frontend Developer',
         content.member2Role || 'Designer & Frontend Developer',
-        content.member3Role || 'App Developer',
+        content.member3Role || 'Mobile Application Developer',
         content.member4Role || 'Backend Developer'
       ];
+      // Load static team images from images/team folder
       const avatars = [
-        images.member1Avatar || '',
-        images.member2Avatar || '',
-        images.member3Avatar || '',
-        images.member4Avatar || ''
+        'images/team/nar.jpeg',      // Narjes Almasri
+        'images/team/leen.jpeg',     // Leen Almahthi
+        'images/team/amr.jpeg',      // Amr Alali
+        'images/team/m.jpeg'   // Mahmood
       ];
-      return names.map((name,i)=>({name, role: roles[i]||'', avatar: avatars[i]||''}));
+      return names.map((name,i)=>({name, role: roles[i]||'', avatar: avatars[i]}));
     }
 
     function renderTeam(){

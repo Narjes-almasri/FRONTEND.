@@ -537,6 +537,7 @@
         <a href="#productsSection">Products</a>
         <a href="#teamSection">Team</a>
         <a href="#ctaSection">Contact</a>
+        <a href="build_preview.html" style="background:rgba(255,255,255,0.25);padding:10px 20px;border-radius:8px">← Back to Editor</a>
       </nav>
       <div class="hamburger" onclick="toggleMobileMenu()">
         <span></span>
@@ -704,27 +705,45 @@
       menu.classList.toggle('active');
     }
     
-    // Initialize with saved data from sessionStorage
+    // Initialize preview from localStorage (by id) or fallback to sessionStorage
     (function init(){
+      const params = new URLSearchParams(window.location.search);
+      const evalId = params.get('evalId');
+      const siteId = params.get('id');
+      let loaded = null;
+      if (evalId) {
+        try {
+          const evals = JSON.parse(localStorage.getItem('savedEvaluations') || '[]');
+          loaded = evals.find(e => e.id === evalId) || null;
+        } catch(e) {}
+      } else if (siteId) {
+        try {
+          const sites = JSON.parse(localStorage.getItem('savedWebsites') || '[]');
+          loaded = sites.find(s => s.id === siteId) || null;
+        } catch(e) {}
+      }
       // Load color palette
       const defaultPalette = ['#0EA5E9','#7C4DFF','#06D6A0'];
-      const paletteRaw = sessionStorage.getItem('selectedPalette');
       let palette = defaultPalette;
-      
-      if (paletteRaw) {
-        try {
-          const parsed = JSON.parse(paletteRaw);
-          if (Array.isArray(parsed.colors) && parsed.colors.length) {
-            palette = parsed.colors;
-          } else if (parsed.primary || parsed.secondary || parsed.tertiary) {
-            palette = [
-              parsed.primary || parsed.color1 || defaultPalette[0],
-              parsed.secondary || parsed.color2 || defaultPalette[1],
-              parsed.tertiary || parsed.color3 || defaultPalette[2]
-            ];
+      if (loaded && loaded.palette && loaded.palette.length) {
+        palette = loaded.palette;
+      } else {
+        const paletteRaw = sessionStorage.getItem('selectedPalette');
+        if (paletteRaw) {
+          try {
+            const parsed = JSON.parse(paletteRaw);
+            if (Array.isArray(parsed.colors) && parsed.colors.length) {
+              palette = parsed.colors;
+            } else if (parsed.primary || parsed.secondary || parsed.tertiary) {
+              palette = [
+                parsed.primary || parsed.color1 || defaultPalette[0],
+                parsed.secondary || parsed.color2 || defaultPalette[1],
+                parsed.tertiary || parsed.color3 || defaultPalette[2]
+              ];
+            }
+          } catch (e) {
+            console.log('Using default palette');
           }
-        } catch (e) {
-          console.log('Using default palette');
         }
       }
       
@@ -734,7 +753,7 @@
       document.documentElement.style.setProperty('--c3', palette[2] || palette[0]);
       
       // Load logo
-      const logo = sessionStorage.getItem('generatedLogo') || sessionStorage.getItem('uploadedLogo');
+      const logo = (loaded && loaded.logo) || sessionStorage.getItem('generatedLogo') || sessionStorage.getItem('uploadedLogo');
       const navLogoEl = document.getElementById('navLogo');
       const footerLogoEl = document.getElementById('footerLogo');
       
@@ -765,7 +784,7 @@
       }
       
       // Load content from sessionStorage
-      const content = JSON.parse(sessionStorage.getItem('pageContent') || '{}');
+      const content = (loaded && loaded.content) || JSON.parse(sessionStorage.getItem('pageContent') || '{}');
       Object.keys(content).forEach(key => {
         const el = document.getElementById(key);
         if (el && content[key]) {
@@ -782,28 +801,44 @@
       });
       
       // Load images
-      const images = JSON.parse(sessionStorage.getItem('pageImages') || '{}');
+      const images = (loaded && loaded.images) || JSON.parse(sessionStorage.getItem('pageImages') || '{}');
       
       // Feature image
       if (images.featureImage) {
         const featImg = document.getElementById('featureImage');
         featImg.style.backgroundImage = `url(${images.featureImage})`;
+        featImg.style.backgroundSize = 'cover';
+        featImg.style.backgroundPosition = 'center';
+        featImg.style.backgroundRepeat = 'no-repeat';
+        featImg.style.opacity = '1';
         featImg.textContent = '';
       }
       
       // Carousel images
       for (let i=1;i<=5;i++){
         const el = document.getElementById(`carouselImg${i}`);
-        if (el && images[`carouselImg${i}`]){
-          el.style.backgroundImage = `url(${images[`carouselImg${i}`]})`;
+        const key = `carouselImg${i}`;
+        const src = images[key];
+        if (el && src){
+          el.style.backgroundImage = `url(${src})`;
+          el.style.backgroundSize = 'cover';
+          el.style.backgroundPosition = 'center';
+          el.style.backgroundRepeat = 'no-repeat';
+          el.style.opacity = '1';
         }
       }
       
       // Product images
       for (let i=1;i<=3;i++){
         const el = document.getElementById(`product${i}Image`);
-        if (el && images[`product${i}Image`]){
-          el.style.backgroundImage = `url(${images[`product${i}Image`]})`;
+        const key = `product${i}Image`;
+        const src = images[key];
+        if (el && src){
+          el.style.backgroundImage = `url(${src})`;
+          el.style.backgroundSize = 'cover';
+          el.style.backgroundPosition = 'center';
+          el.style.backgroundRepeat = 'no-repeat';
+          el.style.opacity = '1';
         }
       }
       
@@ -826,20 +861,20 @@
       const ownerEl = document.getElementById('ownerName');
       const footerOwnerEl = document.getElementById('footerOwner');
       
-      let website = '';
-      let userFullName = '';
-      
-      try {
-        const profRaw = sessionStorage.getItem('userProfile');
-        if (profRaw){
-          const prof = JSON.parse(profRaw);
-          website = prof.websiteName || '';
-          const first = prof.firstName || '';
-          const last = prof.lastName || '';
-          userFullName = [first, last].filter(Boolean).join(' ');
-        }
-      } catch(e) {}
-      
+      let website = (loaded && loaded.name) || '';
+      let userFullName = (loaded && loaded.owner) || '';
+      if (!website || !userFullName) {
+        try {
+          const profRaw = sessionStorage.getItem('userProfile');
+          if (profRaw){
+            const prof = JSON.parse(profRaw);
+            website = website || prof.websiteName || '';
+            const first = prof.firstName || '';
+            const last = prof.lastName || '';
+            userFullName = userFullName || [first, last].filter(Boolean).join(' ');
+          }
+        } catch(e) {}
+      }
       if (!website) {
         website = sessionStorage.getItem('appName') || 'Your Website';
       }
